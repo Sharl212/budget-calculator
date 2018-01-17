@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href='./stylesheets/style.css'>
+    <title>budget</title>
+  </head>
+  <body>
+  <div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="">budget title</span>
+    <!-- <input type='number' name='budget' id='budget' placeholder=" your budget"> -->
+  </div>
+  <input type='text' name='title1' id='title1' placeholder=" Title" required>
+  <input type='number' name='price' id='price1' class='price' placeholder=" Price" required>
+  <label>
+    <!-- <input type='checkbox' id='checkbox1' onclick='add()'> -->
+    <!-- add -->
+  </label>
+  <span id='error'>
+  </div>
+  <div class="input-group">
+  <div class="input-group-prepend">
+    <!-- <input> -->
+    <span class="input-group-text" id="">budget title</span>
+  </div>
+  <input type='text' name='title2' id='title2' placeholder=" Title" required>
+  <input type='number' name='price' id='price2' class='price' placeholder=" Price" required>
+  <label>
+    <button id='save'>save</button>
+    <button id='showAll'>showAll</button>
+    <span id='result'></span>
+    <!-- <input type='checkbox' id='checkbox2' onclick='add()'> -->
+    <!-- add -->
+    <input type='number' name='tBudget' id='totalbudget' placeholder="total price" disabled>
+  </label>
+  </div>
+</body>
+</html>
+<script src='./javascripts/js.js'></script>
+<script src='./libs/jquery-3.2.1.min.js'></script>
+<script defer type='text/javascript'>
+    $(function(){
+      $("#save").click(function(){
+            $.ajax({
+              url: '/budget',
+              contentType: 'application/json',
+              dataType: 'json',
+              type: 'post',
+              data: JSON.stringify({
+               item1: $('#title1').val(),
+               price1: $("#price1").val(),
+               item2: $('#title2').val(),
+               price2: $("#price2").val(),
+               TotalCost: $('#totalbudget').val()
+             }),
+              success: function(result, status, xhr){
+                console.log('success');
+              },
+              error: function(err, status, xhr){
+                console.log('error: ', err);
+              }
+          });
+      });
+  });
+
+  $(function(){
+    $("#showAll").click(function(){
+      $.ajax({
+        url:'/budget',
+        type:'get',
+        dataType: 'html',
+        contentType: 'application/json',
+        data: JSON.stringify(),
+        success: function(data){
+          if(data){
+            $('#result').html("<br>" +JSON.stringify(data)+ "<br>");
+            console.log('success');
+          }
+        },
+        error: function(err, status, xhr){
+          console.log('error: ', err);
+        }
+      });
+    });
+  });
+</script>
+<script>
+  $('.price').keyup(function () {
+
+    var price = document.getElementsByName('price').value;
+    var sum = 0;
+    $('.price').each(function() {
+      sum += Number($(this).val());
+    });
+
+    $('#totalbudget').val(sum);
+  });
+</script>
