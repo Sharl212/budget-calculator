@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var _ = require('lodash');
 
 var budgetCalculator = mongoose.model('budgetCalculator', {
   item1: {

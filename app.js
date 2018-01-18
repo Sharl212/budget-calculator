@@ -3,6 +3,7 @@ var express = require('express'),
     favicon = require('serve-favicon'),
     logger  = require('morgan'),
     cookieParser = require('cookie-parser'),
+    _       = require('lodash'),
     bodyParser = require('body-parser');
 
 var {mongoose} = require('./public/db/mongoose'),
@@ -30,13 +31,8 @@ app.use('/users', users);
 
 // acquire mongoose model specification
 function listPost(req, res){
-  var listPost = new budgetCalculator({
-    item1: req.body.item1,
-    price1: req.body.price1,
-    item2: req.body.item2 ,
-    price2: req.body.price2,
-    TotalCost: req.body.TotalCost
-  });
+  var body = _.pick(req.body, ['item1','item2','price1','price2','TotalCost']);
+  var listPost = new budgetCalculator(body);
   listPost.save().then(function(doc){
     res.send(doc);
   },function(e){
@@ -47,15 +43,18 @@ function listPost(req, res){
 // GET (display) Budget List viewed
 function listGet(req, res){
   budgetCalculator.find().then(function(list){
+    var datastring = JSON.parse(list);
     res.send({
-      list
+      datastring
     });
   },function(e){
     res.status(404).send(e);
   });
 }
-// send data to DATABASE
+// POST to database
 app.post('/budget',listPost);
+
+// GET all Calculated budgets
 app.get('/budget',listGet);
 
 // catch 404 and forward to error handler

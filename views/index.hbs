@@ -55,7 +55,7 @@
                price2: $("#price2").val(),
                TotalCost: $('#totalbudget').val()
              }),
-              success: function(result, status, xhr){
+              success: function(data, status, xhr){
                 console.log('success');
               },
               error: function(err, status, xhr){
@@ -66,16 +66,16 @@
   });
 
   $(function(){
-    $("#showAll").click(function(){
+    $("#showAll").click(function(data){
       $.ajax({
         url:'/budget',
         type:'get',
         dataType: 'html',
         contentType: 'application/json',
-        data: JSON.stringify(),
+        data: JSON.parse(),
         success: function(data){
           if(data){
-            $('#result').html("<br>" +JSON.stringify(data)+ "<br>");
+            $('#result').html(data);
             console.log('success');
           }
         },
