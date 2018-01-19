@@ -1,6 +1,12 @@
 var mongoose = require('mongoose');
 
 var budgetCalculator = mongoose.model('budgetCalculator', {
+  _id: {
+    type: String,
+    required: true,
+    minlength: 1,
+    trim: true
+  },
   item1: {
     type: String,
     required: true,

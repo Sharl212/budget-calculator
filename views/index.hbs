@@ -30,12 +30,15 @@
   <label>
     <button id='save'>save</button>
     <button id='showAll'>showAll</button>
-    <input type="text" id="id" value="">
+    <button id='ShowByID'>Show bY ID</button>
+
+    <input type="text" id="id" value="" placeholder='NOTE TITLE'>
+    <input type="text" id="searchbyid" value="" placeholder='search by note id'>
+    <input type="text" id="deleteById" value="" placeholder="delete BY ID">
     <span id='data'></span>
     <button id='delete'>delete</button>
-    <span id='result'></span>
-    <!-- <input type='checkbox' id='checkbox2' onclick='add()'> -->
-    <!-- add -->
+
+    <div id='result' class="alert alert-primary" role="alert"></div>
     <input type='number' name='tBudget' id='totalbudget' placeholder="total price" disabled>
   </label>
   </div>
@@ -45,10 +48,8 @@
 <script src='./features/deleteOneNote.js'></script>
 <script src='./features/DisplayAllNotes.js'></script>
 <script src='./features/saveOneNote.js'></script>
+<script src='./features/DisplayOneById.js'></script>
 <script src='./AppCode/budgetCalculator.js'></script>
-<script defer type='text/javascript'>
-
-</script>
 <script>
   $('.price').keyup(function () {
 

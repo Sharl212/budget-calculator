@@ -1,18 +1,16 @@
-// GET all notes from database
+// GET one note by ID
 $(function (){
-  $("#showAll").click(function(data){
+  $("#ShowByID").click(function(doc){
+    var id = $('#searchbyid').val();
     $.ajax({
-      url:'/budget',
+      url:'/budget/' + id,
       type:'get',
       dataType: 'html',
       contentType: 'application/json',
       data: JSON.stringify(),
-      success: function(data){
-        if(data){
-          $('#result').css({
-            display: 'inline-block'
-          });
-          $('#result').html(data);
+      success: function(doc){
+        if(doc){
+          $('#result').html(doc);
           console.log('success');
         }
       },

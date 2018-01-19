@@ -7,6 +7,7 @@ $(function(){
       dataType: 'json',
       type: 'post',
       data: JSON.stringify({
+       _id: $('#id').val(),
        item1: $('#title1').val(),
        price1: $("#price1").val(),
        item2: $('#title2').val(),

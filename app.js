@@ -7,7 +7,7 @@ var express = require('express'),
     bodyParser = require('body-parser');
 
 var {mongoose} = require('./public/db/mongoose'),
-    {budgetCalculator} = require('./public/models/budgetCalculator'),
+    {budgetCalculator} = require('./public/models/budgetCalculator-Model'),
      $         = require('./node_modules/jquery/dist/jquery.js'),
      index     = require('./routes/index'),
      users     = require('./routes/users');
@@ -32,7 +32,7 @@ app.use('/users', users);
 
 // acquire mongoose model specification
 function listPost(req, res){
-  var body = _.pick(req.body, ['item1','item2','price1','price2','TotalCost']);
+  var body = _.pick(req.body, ['_id','item1','item2','price1','price2','TotalCost']);
   var listPost = new budgetCalculator(body);
   listPost.save().then(function(doc){
     res.send(doc);
@@ -51,6 +51,29 @@ function listGet(req, res){
     res.status(404).send(e);
   });
 }
+// Display a specific list by ID
+function DisplayOneById(req, res){
+  var id = req.params.id;
+  budgetCalculator.findById(id).then(function(doc){
+    console.log('done');
+    res.send({doc});
+  }, function(e){
+    res.status(400).send(e);
+  })
+}
+// DELETE a specific list by ID
+function deleteList(req, res){
+  var id = req.params.id;
+  budgetCalculator.findByIdAndRemove(id).then(function(doc){
+    if(!doc){
+      return res.status(400).send('not found');
+    }
+    console.log('done');
+    res.send({doc});
+  }, function(e){
+    res.status(400).send(e);
+  })
+}
 
 // POST to database
 app.post('/budget',listPost);
@@ -58,22 +81,13 @@ app.post('/budget',listPost);
 // GET all Calculated budgets
 app.get('/budget',listGet);
 
-// DELETE a specific list
+// GET one note by ID
+
+app.get('/budget/:id',DisplayOneById);
+
 // DELETE existing list.
-app.delete('/budget/:id', function(req, res){
-  var id = req.params.id;
-  if(!ObjectID.isValid(id)){
-    return res.status(404).send();
-  }
-  budgetCalculator.findByIdAndRemove(id).then(function(note){
-    if(!note){
-      return res.status(404).send();
-    };
-    res.send({note});
-  }).catch(function(e){
-    res.status(404).send(e);
-  });
-});
+app.delete('/budget/:id', deleteList);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
