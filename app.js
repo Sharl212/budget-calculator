@@ -3,7 +3,7 @@ var express = require('express'),
     favicon = require('serve-favicon'),
     logger  = require('morgan'),
     cookieParser = require('cookie-parser'),
-    _       = require('lodash'),
+    _          = require('lodash'),
     bodyParser = require('body-parser');
 
 var {mongoose} = require('./public/db/mongoose'),
@@ -12,6 +12,7 @@ var {mongoose} = require('./public/db/mongoose'),
      index     = require('./routes/index'),
      users     = require('./routes/users');
 
+const {MongoDB, ObjectID} = require('mongodb');
 var app = express();
 
 // view engine setup
@@ -43,20 +44,36 @@ function listPost(req, res){
 // GET (display) Budget List viewed
 function listGet(req, res){
   budgetCalculator.find().then(function(list){
-    var datastring = JSON.parse(list);
     res.send({
-      datastring
+      list
     });
   },function(e){
     res.status(404).send(e);
   });
 }
+
 // POST to database
 app.post('/budget',listPost);
 
 // GET all Calculated budgets
 app.get('/budget',listGet);
 
+// DELETE a specific list
+// DELETE existing list.
+app.delete('/budget/:id', function(req, res){
+  var id = req.params.id;
+  if(!ObjectID.isValid(id)){
+    return res.status(404).send();
+  }
+  budgetCalculator.findByIdAndRemove(id).then(function(note){
+    if(!note){
+      return res.status(404).send();
+    };
+    res.send({note});
+  }).catch(function(e){
+    res.status(404).send(e);
+  });
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -75,7 +92,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
 
 app.listen(3000, function(){
   console.log('server up on 3000');
