@@ -10,16 +10,27 @@ $(function(){
         data: JSON.stringify(),
         success: function(data, status, xhr){
           var id = $('#deleteById').val();
-          $("#result").text(id + '  DELETED!');
+          $("#result").addClass('alert-warning').removeClass('alert-success');
+          $("#result").text(id + '  was deleted!');
           $('#result').css({
             display: 'inline-block'
           });
-          $("#result").fadeOut(5000, function() { $(this).remove(); });
-          console.log('success');
+          $("#result").fadeOut(3000, function() { $(this).css({
+            display: 'none'
+          });
+        });
       },
         error: function(err, status, xhr){
-          $('#result').css('display: inline-block;');
-          console.log('error: ', err);
+          $("#result").addClass('alert-danger').removeClass('alert-success');
+          $("#result").text('list not found');
+          $('#result').css({
+            display: 'inline-block'
+          });
+          $("#result").fadeOut(3000, function() { $(this).css({
+            display: 'none'
+          });
+          $("#result").addClass('alert-success').removeClass('alert-danger');
+        });
         }
     });
   });

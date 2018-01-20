@@ -14,8 +14,30 @@ $(function(){
        price2: $("#price2").val(),
        TotalCost: $('#totalbudget').val()
      }),
-      success: function(data, status, xhr){console.log('success');},
-      error: function(err, status, xhr){console.log('error: ', err);}
+      success: function(data, status, xhr){
+        var id = $('#id').val();
+        $("#result").text(id + '  is added to your list!');
+        $('#result').css({
+          display: 'inline-block'
+        });
+        $("#result").fadeOut(3000, function() { $(this).css({
+          display: 'none'
+        });
+      });
+      },
+      error: function(err, status, xhr){
+        console.log('error: ', err);
+        $("#result").addClass('alert-danger').removeClass('alert-success');
+        $("#result").text('ERROR!');
+        $('#result').css({
+          display: 'inline-block'
+        });
+        $("#result").fadeOut(3000, function() { $(this).css({
+          display: 'none'
+        });
+        $("#result").addClass('alert-success').removeClass('alert-danger');
+      });
+      }
     });
   });
 });
