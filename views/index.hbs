@@ -2,53 +2,50 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href='./stylesheets/style.css'>
-    <title>budget</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato"> <!--fonts: lato -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"> <!-- bootstrap v4.0.0-beta.3 -->
+    <link rel="stylesheet" href='./stylesheets/style.css'> <!-- main css file -->
+    <title>Budget Calculator</title>
   </head>
   <body>
-  <div class="input-group">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="">budget title</span>
-    <!-- <input type='number' name='budget' id='budget' placeholder=" your budget"> -->
-  </div>
-  <input type='text' name='title1' id='title1' placeholder=" Title" required>
-  <input type='number' name='price' id='price1' class='price' placeholder=" Price" required>
-  <label>
-    <!-- <input type='checkbox' id='checkbox1' onclick='add()'> -->
-    <!-- add -->
-  </label>
-  <span id='error'>
-  </div>
-  <div class="input-group">
-  <div class="input-group-prepend">
-    <!-- <input> -->
-    <span class="input-group-text" id="">budget title</span>
-  </div>
-  <input type='text' name='title2' id='title2' placeholder=" Title" required>
-  <input type='number' name='price' id='price2' class='price' placeholder=" Price" required>
-  <label>
-    <button id='save'>save</button>
+    <!-- form submittion -->
+<div class="formdiv">
+  <form id='form' method='post' action='/'  target="_blank" >
+    <input class="input-group-text" type="text" id="id" name='_id' placeholder='NOTE NAME' autofocus required autocomplete="off"><br>
+    <!-- note TITLE -->
+    <input type='text' name='firstItem' placeholder="item" onblur='check()' required autocomplete="off">
+    <input type='number' id='fp' name='firstPrice' class='price' placeholder="price" onblur='check()' required autocomplete="off">
+    <input type='text' name='secondItem' placeholder="item" onblur='check()' required autocomplete="off">
+    <input type='number' name='secondPrice' class='price' placeholder="price" onblur='check()' required autocomplete="off">
+    <input type='text' name='thirdItem' placeholder="item" onblur='check()' required autocomplete="off">
+    <input type='number' name='thirdPrice' class='price' placeholder="price" onblur='check()' required autocomplete="off">
+    <input type='number' name='tBudget' id='totalbudget' placeholder="total price" readonly><br>
+    <!-- submit button -->
+    <button id='save-btn' type="Submit" value='Submit'>save</button><br>
     <button id='showAll'>showAll</button>
     <button id='ShowByID'>Show bY ID</button>
-
-    <input type="text" id="id" value="" placeholder='NOTE TITLE'>
-    <input type="text" id="searchbyid" value="" placeholder='search by note id'>
-    <input type="text" id="deleteById" value="" placeholder="delete BY ID">
-    <span id='data'></span>
+    <button id='add'>add more fields</button>
     <button id='delete'>delete</button>
+    <input type="text" id="searchbyid" value="" placeholder='Search note title'>
+    <input type="text" id="deleteById" value="" placeholder="name note to delete">
+    <div id='fname' class="alert alert-success" role="alert"></div>
+    <div id='sname' class="alert alert-success" role="alert"></div>
+    <div id='ftitle' class="alert alert-success" role="alert"></div>
+    <div id='stitle' class="alert alert-success" role="alert"></div>
+    <div id='DisplayNotes' class="alert alert-success" role="alert"></div>
+    <div id='deleteOneNote' class="alert alert-success" role="alert"></div>
+  </form>
+</div>
 
-    <div id='result' class="alert alert-success" role="alert"></div>
-    <input type='number' name='tBudget' id='totalbudget' placeholder="total price" disabled>
-  </label>
-  </div>
+
 </body>
 </html>
 <script src='./libs/jquery-3.2.1.min.js'></script>
-<script src='./features/deleteOneNote.js'></script>
-<script src='./features/DisplayAllNotes.js'></script>
 <script src='./features/saveOneNote.js'></script>
+<script src='./features/DisplayAllNotes.js'></script>
 <script src='./features/DisplayOneById.js'></script>
+<script src='./features/deleteOneNote.js'></script>
+<script src='./features/addMoreInputFields.js'></script>
 <script src='./AppCode/budgetCalculator.js'></script>
 <script>
   $('.price').keyup(function () {

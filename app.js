@@ -23,7 +23,7 @@ app.set('view engine', 'hbs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -32,12 +32,11 @@ app.use('/users', users);
 
 // acquire mongoose model specification
 function listPost(req, res){
-  var body = _.pick(req.body, ['_id','item1','item2','price1','price2','TotalCost']);
-  var listPost = new budgetCalculator(body);
-  listPost.save().then(function(doc){
-    res.send(doc);
-  },function(e){
-    res.status(400).send(e);
+  var Data = new budgetCalculator(req.body);
+  Data.save().then(function(Data){
+    res.send(Data);
+  }).catch(function(e){
+    res.send(e)
   });
 }
 
@@ -76,13 +75,12 @@ function deleteList(req, res){
 }
 
 // POST to database
-app.post('/budget',listPost);
+app.post('/',listPost);
 
 // GET all Calculated budgets
 app.get('/budget',listGet);
 
 // GET one note by ID
-
 app.get('/budget/:id',DisplayOneById);
 
 // DELETE existing list.

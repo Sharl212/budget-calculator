@@ -1,43 +1,45 @@
-// POST notes to database
-$(function(){
-  $("#save").click(function(){
-    $.ajax({
-      url: '/budget',
-      contentType: 'application/json',
-      dataType: 'json',
-      type: 'post',
-      data: JSON.stringify({
-       _id: $('#id').val(),
-       item1: $('#title1').val(),
-       price1: $("#price1").val(),
-       item2: $('#title2').val(),
-       price2: $("#price2").val(),
-       TotalCost: $('#totalbudget').val()
-     }),
-      success: function(data, status, xhr){
-        var id = $('#id').val();
-        $("#result").text(id + '  is added to your list!');
-        $('#result').css({
-          display: 'inline-block'
-        });
-        $("#result").fadeOut(3000, function() { $(this).css({
-          display: 'none'
-        });
-      });
-      },
-      error: function(err, status, xhr){
-        console.log('error: ', err);
-        $("#result").addClass('alert-danger').removeClass('alert-success');
-        $("#result").text('ERROR!');
-        $('#result').css({
-          display: 'inline-block'
-        });
-        $("#result").fadeOut(3000, function() { $(this).css({
-          display: 'none'
-        });
-        $("#result").addClass('alert-success').removeClass('alert-danger');
-      });
-      }
-    });
+function check(){
+  var firstTitle = $("input[name*='firstTitle']").val(),
+       firstPrice = $("input[name*='firstPrice']").val(),
+       secondTitle = $("input[name*='secondTitle']").val(),
+       secondPrice = $("input[name*='secondPrice']").val();
+
+function firstTitleError(){
+  $("#stitle").addClass('alert-warning').removeClass('alert-success');
+  $("#stitle").text('first item is empty!!');
+  $('#stitle').css({
+    display: 'inline-block'
   });
-});
+  $("#stitle").fadeOut(3000, function() { $(this).css({display: 'none'})});
+}
+
+if(firstTitle === ""){
+    return firstTitleError();
+  }else if(firstPrice === ""){
+    $("input[name*='firstPrice']").css({
+      border: '12px solid  greem;'
+    });
+    $("#stitle").addClass('alert-warning').removeClass('alert-success');
+    $("#stitle").text('first price is empty!!');
+    $('#stitle').css({
+      display: 'inline-block'
+    });
+    $("#stitle").fadeOut(3000, function() { $(this).css({display: 'none'})});
+
+  }else if(secondTitle === ""){
+    $("#stitle").addClass('alert-warning').removeClass('alert-success');
+    $("#stitle").text('second item is empty!!');
+    $('#stitle').css({
+      display: 'inline-block'
+    });
+    $("#stitle").fadeOut(3000, function() { $(this).css({display: 'none'})});
+
+  }else if(secondPrice === ""){
+    $("#stitle").addClass('alert-warning').removeClass('alert-success');
+    $("#stitle").text('second price is empty!!');
+    $('#stitle').css({
+      display: 'inline-block'
+    });
+    $("#stitle").fadeOut(3000, function() { $(this).css({display: 'none'})});
+  }
+}

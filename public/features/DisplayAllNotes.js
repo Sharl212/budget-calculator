@@ -10,25 +10,20 @@ $(function (){
       success: function(data){
         if(data){
           var id = $('#id').val();
-          $("#result").addClass('alert-success').removeClass('alert-danger' || 'alert-warning');
-          $("#result").text(data);
-          $('#result').css({
+          $("#DisplayNotes").text(data);
+          $('#DisplayNotes').css({
             display: 'inline-block'
           });
-          $("#result").fadeOut(10000000, function() { $(this).css({
-            display: 'none'
-          });
-        });
         }
       },
       error: function(err, status, xhr){
-        $("#result").addClass('alert-danger').removeClass('alert-success');
-        $("#result").text('ERROR!');
-        $('#result').css({
+        $("#DisplayNotes").addClass('alert-danger').removeClass('alert-success');
+        $("#DisplayNotes").text('ERROR!');
+        $('#DisplayNotes').css({
           display: 'inline-block'
         });
-        $("#result").fadeOut(3000, function() { $(this).css({display: 'none'});
-        $("#result").addClass('alert-success').removeClass('alert-danger');
+        $("#DisplayNotes").fadeOut(3000, function() { $(this).css({display: 'none'});
+        $("#DisplayNotes").addClass('alert-success').removeClass('alert-danger');
       });
       }
     });
