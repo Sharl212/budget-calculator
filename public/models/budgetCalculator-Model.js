@@ -51,7 +51,6 @@ var listSchema = new mongoose.Schema({
   }
 });
 
-
 var budgetCalculator = mongoose.model('budgetCalculator', listSchema);
 
 module.exports = {budgetCalculator};

@@ -6,7 +6,7 @@ $(function (){
       type:'get',
       dataType: 'html',
       contentType: 'application/json',
-      data: JSON.stringify(),
+      data: JSON.stringify(data),
       success: function(data){
         if(data){
           var id = $('#id').val();

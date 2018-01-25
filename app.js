@@ -32,7 +32,9 @@ app.use('/users', users);
 
 // acquire mongoose model specification
 function listPost(req, res){
-  var Data = new budgetCalculator(req.body);
+  var body = _.pick(req.body, ['firstItem','firstPrice','secondItem','secondPrice','thirdItem','thirdPrice']);
+  String.valueOf(body);
+  var Data = new budgetCalculator(body);
   Data.save().then(function(Data){
     res.send(Data);
   }).catch(function(e){

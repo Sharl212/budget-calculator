@@ -12,32 +12,34 @@
 <div class="formdiv">
   <form id='form' method='post' action='/'  target="_blank" >
     <input class="input-group-text" type="text" id="id" name='_id' placeholder='NOTE NAME' autofocus required autocomplete="off"><br>
+    <span class='label2 col-3'>items</span>
+    <span class='label1 col-3'>prices</span>
     <!-- note TITLE -->
-    <input type='text' name='firstItem' placeholder="item" onblur='check()' required autocomplete="off">
-    <input type='number' id='fp' name='firstPrice' class='price' placeholder="price" onblur='check()' required autocomplete="off">
-    <input type='text' name='secondItem' placeholder="item" onblur='check()' required autocomplete="off">
-    <input type='number' name='secondPrice' class='price' placeholder="price" onblur='check()' required autocomplete="off">
-    <input type='text' name='thirdItem' placeholder="item" onblur='check()' required autocomplete="off">
-    <input type='number' name='thirdPrice' class='price' placeholder="price" onblur='check()' required autocomplete="off">
+    <input type='text' name='firstItem' placeholder="" onblur='check()' required autocomplete="off">
+    <input type='number' id='fp' name='firstPrice' class='price'  onblur='check()' required autocomplete="off">
+    <input type='text' name='secondItem'  onblur='check()' required autocomplete="off">
+    <input type='number' name='secondPrice' class='price'  onblur='check()' required autocomplete="off">
+    <input type='text' name='thirdItem'  onblur='check()' required autocomplete="off">
+    <input type='number' name='thirdPrice' class='price'  onblur='check()' required autocomplete="off">
     <input type='number' name='tBudget' id='totalbudget' placeholder="total price" readonly><br>
     <!-- submit button -->
     <button id='save-btn' type="Submit" value='Submit'>save</button><br>
-    <button id='showAll'>showAll</button>
-    <button id='ShowByID'>Show bY ID</button>
-    <button id='add'>add more fields</button>
-    <button id='delete'>delete</button>
-    <input type="text" id="searchbyid" value="" placeholder='Search note title'>
-    <input type="text" id="deleteById" value="" placeholder="name note to delete">
+  </form>
+  <input type="text" id="searchbyid" value="" placeholder='Search'>
+  <input type="text" id="deleteById" value="" placeholder="delete">
+  <button id='ShowByID'>search </button>
+  <button id='showAll'>MY NOTES</button>
+  <button id='add'>add fields</button>
+  <button id='delete'>DELETE</button>
+</div>
+  <div class="alerts col-6">
     <div id='fname' class="alert alert-success" role="alert"></div>
     <div id='sname' class="alert alert-success" role="alert"></div>
     <div id='ftitle' class="alert alert-success" role="alert"></div>
     <div id='stitle' class="alert alert-success" role="alert"></div>
     <div id='DisplayNotes' class="alert alert-success" role="alert"></div>
     <div id='deleteOneNote' class="alert alert-success" role="alert"></div>
-  </form>
-</div>
-
-
+  </div>
 </body>
 </html>
 <script src='./libs/jquery-3.2.1.min.js'></script>
