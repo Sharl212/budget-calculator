@@ -7,9 +7,10 @@ $(function (){
       type:'get',
       dataType: 'html',
       contentType: 'application/json',
-      data: JSON.stringify(),
+      data: JSON.stringify(doc),
       success: function(doc){
-        var id = $('#id').val();
+        var id = $('#searchbyid').val();
+        $('#searchbyid').val("");
         $("#DisplayNotes").text(doc);
         $('#DisplayNotes').css({
           display: 'inline-block'

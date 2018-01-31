@@ -32,8 +32,7 @@ app.use('/users', users);
 
 // acquire mongoose model specification
 function listPost(req, res){
-  var body = _.pick(req.body, ['firstItem','firstPrice','secondItem','secondPrice','thirdItem','thirdPrice']);
-  String.valueOf(body);
+  var body = req.body;
   var Data = new budgetCalculator(body);
   Data.save().then(function(Data){
     res.send(Data);
@@ -44,10 +43,8 @@ function listPost(req, res){
 
 // GET (display) Budget List viewed
 function listGet(req, res){
-  budgetCalculator.find().then(function(list){
-    res.send({
-      list
-    });
+  budgetCalculator.find().then(function(Data){
+    res.send({Data});
   },function(e){
     res.status(404).send(e);
   });
@@ -56,8 +53,12 @@ function listGet(req, res){
 function DisplayOneById(req, res){
   var id = req.params.id;
   budgetCalculator.findById(id).then(function(doc){
-    console.log('done');
-    res.send({doc});
+    res.send({
+      Title:doc._id,
+      item:doc.firstItem,
+      price:doc.firstPrice,
+      
+    });
   }, function(e){
     res.status(400).send(e);
   })

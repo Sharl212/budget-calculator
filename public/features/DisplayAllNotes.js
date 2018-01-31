@@ -1,20 +1,17 @@
 // GET all notes from database
 $(function (){
-  $("#showAll").click(function(data){
+  $("#showAll").click(function(){
     $.ajax({
       url:'/budget',
       type:'get',
       dataType: 'html',
       contentType: 'application/json',
-      data: JSON.stringify(data),
-      success: function(data){
-        if(data){
-          var id = $('#id').val();
-          $("#DisplayNotes").text(data);
+      data: JSON.stringify(),
+      success: function(Data){
+          $("#DisplayNotes").text(Data);
           $('#DisplayNotes').css({
             display: 'inline-block'
           });
-        }
       },
       error: function(err, status, xhr){
         $("#DisplayNotes").addClass('alert-danger').removeClass('alert-success');

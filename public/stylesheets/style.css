@@ -7,34 +7,32 @@ body{
   justify-content: center;
   align-items: center;
   /* background-color: #CC9933; */
-  overflow:hidden;
-  margin-top:5%;
+  /* overflow:hidden; */
   background-image:url(".././images/blurred-background-7.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
 .formdiv{
-  width: 500px;
-  height: 600px;
-  background: #FFF;
-  border: none;
+  width: 600px !important;
+  height: 650px;
+  background:#FFFFFF !important;
   margin-bottom:10%;
   border-radius:3%;
-  box-shadow: -5px 30px 50px black;
+  transform: translateX(10%);
+  border-radius: 3% !important;
+  box-shadow: -5px 30px 50px black !important;
 }
-.alerts{
-  width: 500px;
-  height: 300px;
-  margin-left: 12%;
-
-  background: #FFF;
-  border: none;
-  border-radius:3%;
-  box-shadow: -5px 30px 50px black;
+h4{
+  margin-left:15% !important;
 }
-
 /* body structure  */
-
+.form,
+.input,
+#showAll
+{
+  margin-left:15% !important;
+  margin-top:2%;
+}
 #ftitle,
 #stitle,
 #fname,
@@ -62,121 +60,85 @@ body{
   display:inline-block;
   transition: 0.2s ease all;
 }
-
-input,
-textarea {
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  background: transparent;
-  text-align: center;
-  margin-bottom: 5%;
-  margin-left:13%;
-  padding-top:2%;
-  width:30%;
-  border:none;
-  color:black;
+input[type='number']{
+  margin-top:8% !important;
 }
+
   /* ALL INPUTS */
 input[name='firstItem'],
-textarea{
-  border-bottom: 2px solid #4484CE;
-  margin-top:1%;
-}
 input[name='secondItem'],
 input[name='thirdItem'],
+.price,
 textarea {
-  border-bottom: 2px solid #4484CE;
+  border: 1.5px solid rgba(34,36,38,.15) !important;
   padding: 3px 0px 3px 3px;
+  margin-top: 8% !important;
 }
 
  /* items input */
 input[name='firstItem']:focus,
-textarea{
-  margin: 15px 1px 22px 0px;
-  box-shadow: 0px 1px 2px #4484CE ;
-  padding: 3px 0px 3px 3px;
-  border-bottom: 1px solid #4484CE ;
-  border-radius:2.5px;
-  transition:0.7s;
-  outline:none;
-  margin-left:13%;
-}
 input[name='secondItem']:focus,
 input[name='thirdItem']:focus,
+.price:focus,
 textarea:focus {
-  outline:none;
-  margin: 5px 1px 20px 0px;
-  box-shadow: 0px 1px 2px #4484CE ;
-  padding: 3px 0px 3px 3px;
-  border-bottom: 1px solid #4484CE ;
-  border-radius:2.5px;
-  transition:0.7s;
-  margin-left:13%;
+  border-color:#85b7d9 !important;
 }
  /* items focus */
 input[name='firstItem']:hover,
 input[name='secondItem']:hover,
-input[name='thirdItem']:hover{
-  transition:0.3s;
-  box-shadow: 0px 2px 2px #4484CE ;
-  border-bottom: 1px solid #4484CE ;
-}
-/* items hover */
-
-.price,
-textarea {
-  border-bottom: 2px solid #4484CE;
-  padding: 3px 0px 3px 3px;
-}
-
- /* price input */
-
-.price:focus,
-textarea:focus {
-  padding: 3px 0px 3px 3px;
-  margin: 5px 1px 20px 0px;
-  box-shadow: 0px 1.5px 2px #4484CE ;
-  border-bottom: 1px solid #4484CE ;
-  border-radius:2.5px;
-  transition:0.5s;
-  outline:none;
-  margin-left:13%;
-}
-.price:hover{
-  box-shadow: 0px 1.5px 2px #4484CE ;
-  border-bottom: 0.5px solid #4484CE ;
+input[name='thirdItem']:hover,
+.price:hover,
+{
+  border-color:#c8e4f7 !important;
   transition:0.3s;
 }
 
-/* price hover */
-
+input[name='tBudget'],
 input[name='tBudget']{
   cursor: not-allowed;
-  border-bottom: 3px solid #351934;
-  width:70%;
+  text-align: center;
+  width:100%;
+  font-size: 20px !important;
+  color: green !important;
+  /* border: 1px solid #f76767 !important; */
+}
+input[name='tBudget']::placeholder{
+  color:black !important;
+  text-transform: uppercase;
+  font-size: 15px;
 }
 
-#deleteById{
-  border-bottom: 3px solid #4484CE ;
-  padding: 3px 0px 3px 3px;
-  margin-left:45px;
+.ui{
+  margin-left:69px;
+  width:69%;
+  margin-bottom:2%;
 }
-#searchbyid{
-  padding: 3px 0px 3px 3px;
-  border-bottom: 3px solid #4484CE ;
+#searchbyid:hover{
+  border:1.4px solid #85b7d9;
+
+}
+#searchbyid:focus{
+  border:1.7px solid #85b7d9;
+}
+#deleteById:hover,
+#deleteById:focus
+{
+  box-shadow: rgb(211, 12, 45) 0 0px 0px 0.6px inset;
+}
+#deleteById:focus{
+  border: 0.5px solid #f95e5e;
 }
 ::placeholder
 {
-	color:black;
+	color: #c9c5c5 !important;
   text-align: center;
 }
 
 #id{
   background-color:transparent;
-  border:3px solid #4484CE ;
   margin-top:1%;
-  width:70%;
+  width:100% !important;
+
 }
 #id::placeholder{
   color: black !important;
@@ -187,112 +149,58 @@ input[name='tBudget']{
 }
 /* input fields */
 #save-btn{
-  -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  color:black;
-  background-color: transparent;
-  box-shadow: #4484CE  0 0px 0px 2px inset;
-  border:none;
-  display: block;
-  margin: 20px auto;
-  max-width: 100%;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 35px;
-  padding: 2px 24px;
-  cursor:pointer;
-  margin-left:13%;
-  width:70%;
+  width:100%;
+  margin-top:5px;
+  text-transform: uppercase;
+  font-size:15px;
+}
+span{
+  margin-right:18%;
+}
+#reset-form{
+  width:15%;
+  margin-bottom:5px;
+  padding:8px;
   text-transform: uppercase;
 }
-#save-btn:hover,
-#showAll:hover,
-#add:hover,
+#save-btn:hover{
+  color: white !important;
+  box-shadow: #22a541 0 80px 0px 1px inset !important;
+}
 #ShowByID:hover{
-  color: black;
-  box-shadow: #4484CE  0 80px 0px 2px inset;
+  color: white !important;
+  box-shadow: #4484CE 0 80px 0px 1px inset !important;
 }
 #delete:hover{
-  color:black;
-  box-shadow: rgb(209, 8, 61) 0 80px 0px 2px inset;
+  color:white;
+  box-shadow: rgb(211, 12, 45) 0 80px 0px 2px inset;
+}
+#delete:focus{
+  box-shadow: rgb(211, 12, 45) 0 80px 0px 2px inset;
 }
 #ShowByID
 {
+  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+  box-shadow:#4484CE  0 0px 0px 1.2px inset;
+}
+#delete
+{
   -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
   -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
   -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
   -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
   transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
   color:black;
-  background-color: transparent;
-  box-shadow:#4484CE  0 0px 0px 2px inset;
-  border:none;
-  display: block;
-  max-width: 30%;
-  width:28.5%;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 14px;
-  padding: 2px 19px;
-  cursor:pointer;
-  margin-left: 13%;
-  text-transform: uppercase;
-
+  box-shadow: rgb(211, 12, 45)  0 0px 0px 1.2px inset;
 }
 #showAll
 {
-  -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
   transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  color:black;
-  background-color: transparent;
   box-shadow:#4484CE  0 0px 0px 2px inset;
-  border:none;
-  display: block;
-  max-width: 40%;
-  width:30%;
-  /* margin-bottom:10%; */
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 14px;
-  padding: 2px 19px;
-  cursor:pointer;
-  margin-left:53%;
-  margin-top:-5%;
   text-transform: uppercase;
-
 }
-#add
-{
-  -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  color:black;
-  background-color: transparent;
-  box-shadow:#4484CE  0 0px 0px 2px inset;
-  border:none;
-  display: block;
-  max-width: 40%;
-  width:30%;
-  /* margin-bottom:10%; */
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 14px;
-  padding: 2px 19px;
-  cursor:pointer;
-  margin-left:53%;
-  margin-top: 2%;
-  text-transform: uppercase;
-
-}
-#delete{
+/
+/* #add{
   -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
   -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
   -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
@@ -305,7 +213,6 @@ input[name='tBudget']{
   display: block;
   max-width: 40%;
   width:28.5%;
-  /* margin-bottom:10%; */
   text-decoration: none;
   border-radius: 4px;
   font-size: 14px;
@@ -315,4 +222,4 @@ input[name='tBudget']{
   margin-top:-5%;
   text-transform: uppercase;
 
-}
+} */

@@ -10,6 +10,7 @@ $(function(){
         data: JSON.stringify(),
         success: function(data, status, xhr){
           var id = $('#deleteById').val();
+          $('#deleteById').val("");
           $("#deleteOneNote").addClass('alert-warning').removeClass('alert-success');
           $("#deleteOneNote").text(id + '  was deleted!');
           $('#deleteOneNote').css({

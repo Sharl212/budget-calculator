@@ -1,30 +1,33 @@
 function check(){
-  var firstTitle = $("input[name*='firstTitle']").val(),
-       firstPrice = $("input[name*='firstPrice']").val(),
-       secondTitle = $("input[name*='secondTitle']").val(),
-       secondPrice = $("input[name*='secondPrice']").val();
+  var firstItem = $("input[name*='firstItem']").val(),
+      firstPrice = $("input[name*='firstPrice']").val(),
+      secondTitle = $("input[name*='secondTitle']").val(),
+      secondPrice = $("input[name*='secondPrice']").val();
 
-function firstTitleError(){
-  $("#stitle").addClass('alert-warning').removeClass('alert-success');
-  $("#stitle").text('first item is empty!!');
-  $('#stitle').css({
-    display: 'inline-block'
-  });
-  $("#stitle").fadeOut(3000, function() { $(this).css({display: 'none'})});
-}
+// function firstTitleError(){
+//   $("#stitle").addClass('alert-warning').removeClass('alert-success');
+//   $("#stitle").text('first item is empty!!');
+//   $('#stitle').css({
+//     display: 'inline-block'
+//   });
+//   $("#stitle").fadeOut(3000, function() { $(this).css({display: 'none'})});
+// }
 
-if(firstTitle === ""){
-    return firstTitleError();
+if(firstItem === ""){
+    // return firstTitleError();
+  return  $("#1st").css({
+      border:'2px solid red !important'
+    });
   }else if(firstPrice === ""){
     $("input[name*='firstPrice']").css({
-      border: '12px solid  greem;'
+      border: '12px solid green;'
     });
-    $("#stitle").addClass('alert-warning').removeClass('alert-success');
-    $("#stitle").text('first price is empty!!');
-    $('#stitle').css({
-      display: 'inline-block'
-    });
-    $("#stitle").fadeOut(3000, function() { $(this).css({display: 'none'})});
+    // $("#stitle").addClass('alert-warning').removeClass('alert-success');
+    // $("#stitle").text('first price is empty!!');
+    // $('#stitle').css({
+    //   display: 'inline-block'
+    // });
+    // $("#stitle").fadeOut(3000, function() { $(this).css({display: 'none'})});
 
   }else if(secondTitle === ""){
     $("#stitle").addClass('alert-warning').removeClass('alert-success');
