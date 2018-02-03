@@ -1,16 +1,19 @@
-var express = require('express'),
-    path    = require('path'),
-    favicon = require('serve-favicon'),
-    logger  = require('morgan'),
-    cookieParser = require('cookie-parser'),
-    _          = require('lodash'),
-    bodyParser = require('body-parser');
+const express = require('express'),
+      path    = require('path'),
+      favicon = require('serve-favicon'),
+      logger  = require('morgan'),
+      cookieParser = require('cookie-parser'),
+      _          = require('lodash'),
+      bodyParser = require('body-parser');
 
-var {mongoose} = require('./public/db/mongoose'),
-    {budgetCalculator} = require('./public/models/budgetCalculator-Model'),
-     $         = require('./node_modules/jquery/dist/jquery.js'),
-     index     = require('./routes/index'),
-     users     = require('./routes/users');
+  var {mongoose} = require('./public/db/mongoose'),
+      port       = 4000,
+      {budgetCalculator} = require('./public/models/budgetCalculator-Model'),
+      {User}     = require('./public/models/users-Model'),
+      {authenticate} = require('./public/middleware/authenticate'),
+       $         = require('./node_modules/jquery/dist/jquery.js'),
+       index     = require('./routes/index'),
+       users     = require('./routes/users');
 
 const {MongoDB, ObjectID} = require('mongodb');
 var app = express();
@@ -57,7 +60,7 @@ function DisplayOneById(req, res){
       Title:doc._id,
       item:doc.firstItem,
       price:doc.firstPrice,
-      
+
     });
   }, function(e){
     res.status(400).send(e);
@@ -74,8 +77,25 @@ function deleteList(req, res){
     res.send({doc});
   }, function(e){
     res.status(400).send(e);
+  });
+}
+
+// user registration
+function userRegistration(req, res){
+  var body = _.pick(req.body, ['email', 'password']);
+  var user = new User(body);
+  console.log(user);
+  user.save().then(function() {
+    return user.generateAuthToken();
+  }).then(function(token) {
+    res.header('x-auth', token).send(user);
+    console.log(token);
+  }).catch(function(e) {
+    res.status(400).send(e);
   })
 }
+
+
 
 // POST to database
 app.post('/',listPost);
@@ -88,6 +108,14 @@ app.get('/budget/:id',DisplayOneById);
 
 // DELETE existing list.
 app.delete('/budget/:id', deleteList);
+
+// user registration
+app.post('/users', userRegistration);
+
+// log in with the same token value
+app.get('/users/me', authenticate ,function(req, res){
+  res.status(200).send(user);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -108,6 +136,6 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-app.listen(3000, function(){
-  console.log('server up on 3000');
+app.listen(port, function(){
+  console.log(`server up on ${port}`);
 });

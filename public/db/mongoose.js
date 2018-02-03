@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
+var {MongoClient} = require('mongodb');
 
 var promise = mongoose.createConnection('mongodb://localhost:27017/budgetCalculator', {
   useMongoClient: true
