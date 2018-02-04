@@ -120,13 +120,22 @@ app.delete('/budget/:id', deleteList);
 
 // user registration
 app.post('/users', userRegistration);
-  
+
 // user login with email, password
 app.post('/users/login', userLogin);
 
+// user log out {DELETE TOKEN}
+app.delete('/users/me/token', authenticate ,function(req, res){
+  req.user.removeToken(req.token).then(function(){
+    res.status(200).send();
+  }, function(req , res){
+    res.status(400).send();
+  });
+});
+
 // log in with the same token value
 app.get('/users/me', authenticate ,function(req, res){
-  res.status(200).send(user);
+  res.send(req.user);
 });
 
 // catch 404 and forward to error handler
