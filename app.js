@@ -84,18 +84,27 @@ function deleteList(req, res){
 function userRegistration(req, res){
   var body = _.pick(req.body, ['email', 'password']);
   var user = new User(body);
-  console.log(user);
   user.save().then(function() {
     return user.generateAuthToken();
   }).then(function(token) {
     res.header('x-auth', token).send(user);
-    console.log(token);
   }).catch(function(e) {
     res.status(400).send(e);
   })
 }
 
+// POST /users/login {email, password}
+function userLogin(req, res){
+  var body = _.pick(req.body, ["email", "password"]);
 
+  User.findByCredentials(body.email, body.password).then(function(user){
+    return user.generateAuthToken().then(function(token){
+      res.header('x-auth', token).send(user);
+    });
+  }).catch(function(e){
+    res.status(400).send();
+  });
+}
 
 // POST to database
 app.post('/',listPost);
@@ -111,6 +120,9 @@ app.delete('/budget/:id', deleteList);
 
 // user registration
 app.post('/users', userRegistration);
+  
+// user login with email, password
+app.post('/users/login', userLogin);
 
 // log in with the same token value
 app.get('/users/me', authenticate ,function(req, res){
