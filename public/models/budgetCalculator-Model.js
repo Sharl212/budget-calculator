@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 var listSchema = new mongoose.Schema({
+  _creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
+  },
   _id: {
     type: String,
     required: true,

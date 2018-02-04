@@ -35,8 +35,18 @@ app.use('/users', users);
 
 // acquire mongoose model specification
 function listPost(req, res){
-  var body = req.body;
-  var Data = new budgetCalculator(body);
+  // var body = _.pick(req.body,['firstItem','secondPrice']);
+  var Data = new budgetCalculator({
+    _creator:req.user._id,
+    _id: req.body._id,
+    firstItem: req.body.firstItem,
+    firstPrice: req.body.firstPrice,
+    secondItem: req.body.secondItem,
+    secondPrice: req.body.secondPrice,
+    thirdItem: req.body.thirdItem,
+    thirdPrice: req.body.thirdPrice,
+    tBudget: req.body.tBudget
+  });
   Data.save().then(function(Data){
     res.send(Data);
   }).catch(function(e){
@@ -46,7 +56,9 @@ function listPost(req, res){
 
 // GET (display) Budget List viewed
 function listGet(req, res){
-  budgetCalculator.find().then(function(Data){
+  budgetCalculator.find({
+    _creator: req.user._id
+  }).then(function(Data){
     res.send({Data});
   },function(e){
     res.status(404).send(e);
@@ -54,14 +66,11 @@ function listGet(req, res){
 }
 // Display a specific list by ID
 function DisplayOneById(req, res){
-  var id = req.params.id;
-  budgetCalculator.findById(id).then(function(doc){
-    res.send({
-      Title:doc._id,
-      item:doc.firstItem,
-      price:doc.firstPrice,
-
-    });
+  budgetCalculator.findOne({
+    _id: req.params.id,
+    _creator: req.user._id
+  }).then(function(doc){
+    res.send(doc);
   }, function(e){
     res.status(400).send(e);
   })
@@ -69,7 +78,10 @@ function DisplayOneById(req, res){
 // DELETE a specific list by ID
 function deleteList(req, res){
   var id = req.params.id;
-  budgetCalculator.findByIdAndRemove(id).then(function(doc){
+  budgetCalculator.findOneAndRemove({
+    id: req.params.id,
+    _creator: req.user._id
+  }).then(function(doc){
     if(!doc){
       return res.status(400).send('not found');
     }
@@ -107,13 +119,13 @@ function userLogin(req, res){
 }
 
 // POST to database
-app.post('/',listPost);
+app.post('/',authenticate ,listPost);
 
 // GET all Calculated budgets
-app.get('/budget',listGet);
+app.get('/budget',authenticate ,listGet);
 
 // GET one note by ID
-app.get('/budget/:id',DisplayOneById);
+app.get('/budget/:id', authenticate ,DisplayOneById);
 
 // DELETE existing list.
 app.delete('/budget/:id', deleteList);
