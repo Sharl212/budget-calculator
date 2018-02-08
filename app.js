@@ -4,6 +4,7 @@ const express = require('express'),
       logger  = require('morgan'),
       cookieParser = require('cookie-parser'),
       _          = require('lodash'),
+      cookie     = require('cookie'),
       bodyParser = require('body-parser');
 
   var {mongoose} = require('./public/db/mongoose'),
@@ -12,8 +13,9 @@ const express = require('express'),
       {User}     = require('./public/models/users-Model'),
       {authenticate} = require('./public/middleware/authenticate'),
        $         = require('./node_modules/jquery/dist/jquery.js'),
-       index     = require('./routes/index'),
-       users     = require('./routes/users');
+       application = require('./routes/app'),
+       login     = require('./routes/login'),
+       registration = require('./routes/registration');
 
 const {MongoDB, ObjectID} = require('mongodb');
 var app = express();
@@ -30,12 +32,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.use('/', login);
+app.use('/register', registration);
+app.use('/app', application);
 
 // acquire mongoose model specification
 function listPost(req, res){
-  // var body = _.pick(req.body,['firstItem','secondPrice']);
   var Data = new budgetCalculator({
     _creator:req.user._id,
     _id: req.body._id,
@@ -48,7 +50,7 @@ function listPost(req, res){
     tBudget: req.body.tBudget
   });
   Data.save().then(function(Data){
-    res.send(Data);
+    res.send({Data});
   }).catch(function(e){
     res.send(e)
   });
@@ -56,8 +58,8 @@ function listPost(req, res){
 
 // GET (display) Budget List viewed
 function listGet(req, res){
-  budgetCalculator.find({
-    _creator: req.user._id
+  budgetCalculator.findOne({
+    _id: req.user.id
   }).then(function(Data){
     res.send({Data});
   },function(e){
@@ -110,22 +112,32 @@ function userLogin(req, res){
   var body = _.pick(req.body, ["email", "password"]);
 
   User.findByCredentials(body.email, body.password).then(function(user){
-    return user.generateAuthToken().then(function(token){
-      res.header('x-auth', token).send(user);
+     return user.generateAuthToken().then(function(token){
+       // res.cookie('authorization', token, {maxAge: 3 * 60 * 60 * 1000}).send(user);
+       res.setHeader('set-cookie',token).send(user);
+       // req.header('x-auth',token).send(user);
+        console.log('APP.JS', token);
     });
   }).catch(function(e){
     res.status(400).send();
   });
 }
-
+  // user log out {remove token}
+  function userLogout(req, res){
+   req.user.removeToken(req.token).then(function(){
+     res.status(200).send();
+   }, function(req , res){
+     res.status(400).send();
+   });
+  }
 // POST to database
-app.post('/',authenticate ,listPost);
+app.post('/', authenticate, listPost);
 
 // GET all Calculated budgets
-app.get('/budget',authenticate ,listGet);
+app.get('/budget' ,listGet);
 
 // GET one note by ID
-app.get('/budget/:id', authenticate ,DisplayOneById);
+app.get('/budget/:id', DisplayOneById);
 
 // DELETE existing list.
 app.delete('/budget/:id', deleteList);
@@ -137,13 +149,7 @@ app.post('/users', userRegistration);
 app.post('/users/login', userLogin);
 
 // user log out {DELETE TOKEN}
-app.delete('/users/me/token', authenticate ,function(req, res){
-  req.user.removeToken(req.token).then(function(){
-    res.status(200).send();
-  }, function(req , res){
-    res.status(400).send();
-  });
-});
+app.delete('/users/me/token', authenticate, userLogout);
 
 // log in with the same token value
 app.get('/users/me', authenticate ,function(req, res){

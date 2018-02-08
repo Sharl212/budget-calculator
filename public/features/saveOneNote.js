@@ -1,48 +1,26 @@
-function check(){
-  var firstItem = $("input[name*='firstItem']").val(),
-      firstPrice = $("input[name*='firstPrice']").val(),
-      secondTitle = $("input[name*='secondTitle']").val(),
-      secondPrice = $("input[name*='secondPrice']").val();
-
-// function firstTitleError(){
-//   $("#stitle").addClass('alert-warning').removeClass('alert-success');
-//   $("#stitle").text('first item is empty!!');
-//   $('#stitle').css({
-//     display: 'inline-block'
+// $(function(){
+//   $('.form').submit(function(e){
+//     e.preventDefault();
+//     $.ajax({
+//       url:'/',
+//       type:'post',
+//       dataType:'json',
+//       contentType: 'application/json',
+//       data: JSON.stringify({
+//         firstItem: $('input[name="firstItem"]').val(),
+//         firstPrice: $('input[name="firstPrice"]').val(),
+//         secondItem: $('input[name="secondItem"]').val(),
+//         secondPrice: $('input[name="secondPrice"]').val(),
+//         thirdItem: $('input[name="thirdItem"]').val(),
+//         thirdPrice: $('input[name="thirdPrice"]').val(),
+//         tBudget: $('input[name="tBudget"]').val()
+//       }),
+//       success: function(doc){
+//         $('#DisplayNotes').text(docs);
+//       },
+//       error: function(err, status, xhr){
+//         console.log(err);
+//       }
+//     });
 //   });
-//   $("#stitle").fadeOut(3000, function() { $(this).css({display: 'none'})});
-// }
-
-if(firstItem === ""){
-    // return firstTitleError();
-  return  $("#1st").css({
-      border:'2px solid red !important'
-    });
-  }else if(firstPrice === ""){
-    $("input[name*='firstPrice']").css({
-      border: '12px solid green;'
-    });
-    // $("#stitle").addClass('alert-warning').removeClass('alert-success');
-    // $("#stitle").text('first price is empty!!');
-    // $('#stitle').css({
-    //   display: 'inline-block'
-    // });
-    // $("#stitle").fadeOut(3000, function() { $(this).css({display: 'none'})});
-
-  }else if(secondTitle === ""){
-    $("#stitle").addClass('alert-warning').removeClass('alert-success');
-    $("#stitle").text('second item is empty!!');
-    $('#stitle').css({
-      display: 'inline-block'
-    });
-    $("#stitle").fadeOut(3000, function() { $(this).css({display: 'none'})});
-
-  }else if(secondPrice === ""){
-    $("#stitle").addClass('alert-warning').removeClass('alert-success');
-    $("#stitle").text('second price is empty!!');
-    $('#stitle').css({
-      display: 'inline-block'
-    });
-    $("#stitle").fadeOut(3000, function() { $(this).css({display: 'none'})});
-  }
-}
+// });

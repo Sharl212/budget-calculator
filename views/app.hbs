@@ -26,33 +26,33 @@
 </div>
     <!-- form submittion -->
 <div class="formdiv ui inverted segment">
-  <form class="ui form" id='form' method='post' action='/'  target="_blank">
+  <form class="ui form" id='form' method='post' action='/'>
   <div class="field">
     <h4 class="ui horizontal divider header">
       Budget Calculator
     </h4>
     <div class="">
-      <input class="input-group-text" type="text" id="id" name='_id' placeholder='NOTE NAME' autofocus required autocomplete="off">
+      <input value="1" class="input-group-text" type="text" id="id" name='_id' placeholder='NOTE NAME' autofocus required autocomplete="off">
     </div><br>
     <div class="two fields">
       <div class="field">
-        <input type='text' name='firstItem' id='1st' onblur='check()' placeholder='item' required autocomplete="off">
-        <input type='text' name='secondItem'  onblur='check()' placeholder='item' required autocomplete="off">
-        <input type='text' name='thirdItem'  onblur='check()' placeholder='item' required autocomplete="off">
+        <input value="1" value="1" type='text' name='firstItem' id='1st'  placeholder='item' required autocomplete="off">
+        <input value="1" type='text' name='secondItem'   placeholder='item' required autocomplete="off">
+        <input value="1" type='text' name='thirdItem'   placeholder='item' required autocomplete="off">
       </div>
       <div class="field">
-        <input type='number' id='fp' name='firstPrice' class='price'  placeholder='price' onblur='check()' required autocomplete="off">
-        <input type='number' name='secondPrice' class='price'  placeholder='price' onblur='check()' required autocomplete="off">
-        <input type='number' name='thirdPrice' class='price'  placeholder='price' onblur='check()' required autocomplete="off">
+        <input value="1" type='number' id='fp' name='firstPrice' class='price'  placeholder='price'  required autocomplete="off">
+        <input value="1" type='number' name='secondPrice' class='price'  placeholder='price'  required autocomplete="off">
+        <input value="1" type='number' name='thirdPrice' class='price'  placeholder='price'  required autocomplete="off">
       </div>
     </div>
-    <input type='number' name='tBudget' id='totalbudget' placeholder="total price" readonly><br>
+    <input value="1" type='number' name='tBudget' id='totalbudget' placeholder="total price" readonly><br>
   </div>
   <button id='reset-form' class='ui red button'>reset</button>
-  <div id='save-btn' class="ui teal labeled icon positive button">
+  <button id='save-btn' type='submit' class="ui teal labeled icon positive button">
       <span>save</span>
       <i class="add icon"></i>
-    </div>
+  </button>
 <br>
   </form>
   <div class="ui icon input">

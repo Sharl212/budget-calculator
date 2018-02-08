@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const express = require('express');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
@@ -50,9 +51,8 @@ var UserSchema = new mongoose.Schema({
     var token = jwt.sign({_id: user._id.toHexString(), access}, 'abc123').toString();
 
     user.tokens.push({access, token});
-
     return user.save().then(function(){
-      return token;
+       return token;
     });
   };
 
@@ -66,6 +66,8 @@ var UserSchema = new mongoose.Schema({
       }
     });
   };
+
+
 // search by token to authenticate user login
   UserSchema.statics.findByToken = function(token){
     var User = this;
@@ -85,7 +87,7 @@ var UserSchema = new mongoose.Schema({
 }
 
 
-  // LOG IN find By Credentials
+  // LOG IN {find By Credentials}
   UserSchema.statics.findByCredentials = function(email , password){
     var User = this;
 
@@ -94,13 +96,14 @@ var UserSchema = new mongoose.Schema({
         return Promise.reject();
       }
 
-      return new Promise(function(resolve, reject){
-        bcrypt.compare(password, user.password, function(err, res){
-            if(res === true){
-              resolve(user);
-            }else{
-              reject();
-            }
+      return new Promise((resolve, reject) => {
+        // Use bcrypt.compare to compare password and user.password
+        bcrypt.compare(password, user.password, (err, res) => {
+          if (res) {
+            resolve(user);
+          } else {
+            reject();
+          }
         });
       });
     });
