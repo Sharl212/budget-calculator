@@ -8,10 +8,11 @@ var app = express();
 app.use(cookieParser());
 
 var authenticate = function(req, res, next){
-  // var token = req.cookie.auth;
+  var token = req.cookies.authorization;
   // var token = req.header('x-auth');
-  var token = req.header('set-cookie');
+  // var token = req.header('set-cookie');
   // var token = Cookie('auth');
+  // var token = localStorage.getItem("token");
   console.log('authenticate.js',token);
   User.findByToken(token).then(function(user){
     if(!user){

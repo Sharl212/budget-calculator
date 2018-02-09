@@ -50,22 +50,33 @@ function listPost(req, res){
     tBudget: req.body.tBudget
   });
   Data.save().then(function(Data){
-    res.send({Data});
-  }).catch(function(e){
+     return Data.generateAuthToken();
+  }).then(function(token){
+      // res.header('x-auth',token).send(Data);
+      // res.cookie('authorization', token).send(Data);
+      res.cookie('authorization', token).send({Data});
+      console.log('token', token);
+    }).catch(function(e){
     res.send(e)
   });
 }
+// POST to database
+app.post('/', authenticate, listPost);
 
 // GET (display) Budget List viewed
 function listGet(req, res){
-  budgetCalculator.findOne({
-    _id: req.user.id
-  }).then(function(Data){
-    res.send({Data});
-  },function(e){
-    res.status(404).send(e);
+    budgetCalculator.find({_creator: req.user._id}).then(function(Data){
+      return user.generateAuthToken().then(function(token){
+        res.cookie('authorization', token).send({Data});
+        console.log('ww');
+    }).catch(function(e){
+      res.status(404).send(e);
+    });
   });
 }
+// GET all Calculated budgets
+app.get('/budget', authenticate ,listGet);
+
 // Display a specific list by ID
 function DisplayOneById(req, res){
   budgetCalculator.findOne({
@@ -113,9 +124,9 @@ function userLogin(req, res){
 
   User.findByCredentials(body.email, body.password).then(function(user){
      return user.generateAuthToken().then(function(token){
-       // res.cookie('authorization', token, {maxAge: 3 * 60 * 60 * 1000}).send(user);
-       res.setHeader('set-cookie',token).send(user);
-       // req.header('x-auth',token).send(user);
+       res.cookie('authorization', token).send(user);
+       // res.header('x-auth',token).send(user);
+       // localStorage.setItem('token','MY FUCKING token');
         console.log('APP.JS', token);
     });
   }).catch(function(e){
@@ -130,11 +141,7 @@ function userLogin(req, res){
      res.status(400).send();
    });
   }
-// POST to database
-app.post('/', authenticate, listPost);
 
-// GET all Calculated budgets
-app.get('/budget' ,listGet);
 
 // GET one note by ID
 app.get('/budget/:id', DisplayOneById);
