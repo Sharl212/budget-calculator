@@ -32,9 +32,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', login);
-app.use('/register', registration);
-app.use('/app', application);
+app.use(express.static(path.join(__dirname, 'Client')));
+
+app.get('/', function(req,res){
+  res.sendFile(path.join(__dirname + '/Client/src/app/component/app.component.html'));
+});
+
+
+// app.get('/app', function(req,res){
+//   res.sendFile(path.join(__dirname + '/Client/dist/views/app.html'));
+// });
+//
+// app.get('/register', function(req,res){
+//   res.sendFile(path.join(__dirname + '/Client/dist/views/registration.html'));
+// });
 
 // acquire mongoose model specification
 function listPost(req, res){
@@ -52,8 +63,6 @@ function listPost(req, res){
   Data.save().then(function(Data){
      return Data.generateAuthToken();
   }).then(function(token){
-      // res.header('x-auth',token).send(Data);
-      // res.cookie('authorization', token).send(Data);
       res.cookie('authorization', token).send({Data});
       console.log('token', token);
     }).catch(function(e){
@@ -61,18 +70,21 @@ function listPost(req, res){
   });
 }
 // POST to database
-app.post('/', authenticate, listPost);
+app.post('/post', authenticate, listPost);
 
 // GET (display) Budget List viewed
 function listGet(req, res){
-    budgetCalculator.find({_creator: req.user._id}).then(function(Data){
-      return user.generateAuthToken().then(function(token){
-        res.cookie('authorization', token).send({Data});
-        console.log('ww');
+    budgetCalculator.find({
+      _creator: req.user._id,
+    })
+    .then(function(Data){
+      return user.generateAuthToken();
+    }).then(function(token){
+      res.cookie('authorization', token).send(Data);
     }).catch(function(e){
       res.status(404).send(e);
-    });
-  });
+    })
+  // });
 }
 // GET all Calculated budgets
 app.get('/budget', authenticate ,listGet);
@@ -80,14 +92,21 @@ app.get('/budget', authenticate ,listGet);
 // Display a specific list by ID
 function DisplayOneById(req, res){
   budgetCalculator.findOne({
-    _id: req.params.id,
-    _creator: req.user._id
-  }).then(function(doc){
-    res.send(doc);
-  }, function(e){
-    res.status(400).send(e);
-  })
+    _creator: req.user._id,
+    _id: req.body._id
+  }).then(function(Data){
+    return user.generateAuthToken();
+  }).then(function(token){
+    res.cookie('authorization', token).send(Data);
+  }).catch(function(e){
+    res.status(404).send(e);
+  });
 }
+
+// GET one note by ID
+app.get('/budget/:id', authenticate , DisplayOneById);
+
+
 // DELETE a specific list by ID
 function deleteList(req, res){
   var id = req.params.id;
@@ -142,9 +161,6 @@ function userLogin(req, res){
    });
   }
 
-
-// GET one note by ID
-app.get('/budget/:id', DisplayOneById);
 
 // DELETE existing list.
 app.delete('/budget/:id', deleteList);

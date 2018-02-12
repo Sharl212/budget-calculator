@@ -1,13 +1,13 @@
 // GET one note by ID
 $(function (){
-  $("#ShowByID").click(function(doc){
+  $("#ShowByID").click(function(){
     var id = $('#searchbyid').val();
     $.ajax({
       url:'/budget/' + id,
       type:'get',
       dataType: 'html',
       contentType: 'application/json',
-      data: JSON.stringify(doc),
+      data: JSON.stringify(),
       success: function(doc){
         var id = $('#searchbyid').val();
         $('#searchbyid').val("");
@@ -17,7 +17,7 @@ $(function (){
         });
       },
       error: function(err, status, xhr){
-        var id = $('#id').val();
+        var id = $('#searchbyid').val();
         $("#DisplayNotes").addClass('alert-danger').removeClass('alert-success');
         $("#DisplayNotes").text(id +'NOT FOUND!');
         $('#DisplayNotes').css({

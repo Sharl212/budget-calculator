@@ -1,6 +1,6 @@
 // GET all notes from database
 $(function (){
-  $("#showAll").click(function(e){
+  $("#showAll").click(function(){
     $.ajax({
       url:'/budget',
       type:'get',
