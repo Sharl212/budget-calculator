@@ -1,0 +1,28 @@
+.myNotesList {
+    margin-bottom: 10px;
+    border: 2px solid red;
+    display:inline-block;
+    text-align:left;
+}
+.dynamicData{
+    margin-right:30px;
+}
+#title{
+    text-align:center !important;
+}
+.ui.success.message{
+    display:none;
+}
+.successMesg{
+    text-align:center;
+}
+.ui.negative.message{
+    display:none;
+}
+.errorMesg{
+    text-align:center;
+}
+
+.is-active {
+    font-weight: bold;
+}

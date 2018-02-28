@@ -1,0 +1,25 @@
+{
+  "name": "react-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/plugin-transform-react-jsx": "^7.0.0-beta.40",
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "flow-bin": "^0.66.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1",
+    "superagent": "^3.8.2",
+    "typescript": "^2.7.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:4000"
+}

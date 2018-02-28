@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato"> <!--fonts: lato -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"> <!-- bootstrap v4.0.0-beta.3 -->
+    <link rel="stylesheet" type="text/css" href="./libs/semantic/dist/semantic.min.css">
+    <link rel="stylesheet" href='./stylesheets/style.css'> <!-- main css file -->
+    <title>Budget Calculator</title>
+  </head>
+  <body>
+    <!-- side bar -->
+    <div class="ui left demo vertical inverted sidebar labeled icon menu">
+  <a class="item">
+    <i class="home icon"></i>
+    Home
+  </a>
+  <a class="item">
+    <i class="block layout icon"></i>
+    Topics
+  </a>
+  <a class="item">
+    <i class="smile icon"></i>
+    Friends
+  </a>
+</div>
+    <!-- form submittion -->
+<div class="formdiv ui inverted segment">
+  <form class="ui form" id='form' method='post' action='/'>
+  <div class="field">
+    <h4 class="ui horizontal divider header">
+      Budget Calculator
+    </h4>
+    <div class="">
+      <input value="1" class="input-group-text" type="text" id="id" name='_id' placeholder='NOTE NAME' autofocus required autocomplete="off">
+    </div><br>
+    <div class="two fields">
+      <div class="field">
+        <input value="1" value="1" type='text' name='firstItem' id='1st'  placeholder='item' required autocomplete="off">
+        <input value="1" type='text' name='secondItem'   placeholder='item' required autocomplete="off">
+        <input value="1" type='text' name='thirdItem'   placeholder='item' required autocomplete="off">
+      </div>
+      <div class="field">
+        <input value="1" type='number' id='fp' name='firstPrice' class='price'  placeholder='price'  required autocomplete="off">
+        <input value="1" type='number' name='secondPrice' class='price'  placeholder='price'  required autocomplete="off">
+        <input value="1" type='number' name='thirdPrice' class='price'  placeholder='price'  required autocomplete="off">
+      </div>
+    </div>
+    <input value="1" type='number' name='tBudget' id='totalbudget' placeholder="total price" readonly><br>
+  </div>
+  <button id='reset-form' class='ui red button'>reset</button>
+  <button id='save-btn' type='submit' class="ui teal labeled icon positive button">
+      <span>save</span>
+      <i class="add icon"></i>
+  </button>
+<br>
+  </form>
+  <div class="ui icon input">
+    <input type="text" id='searchbyid' placeholder="Search...">
+    <i  id='ShowByID' class="circular search link icon"></i>
+  </div><br>
+  <div class="ui icon input">
+    <input type="text" id="deleteById" value="" placeholder="Delete...">
+    <i  id='delete' class="circular trash link icon"></i>
+  </div>
+  <button id='showAll' class='ui blue button'>my notes</button>
+</div>
+  <div class="alerts col-6">
+    <div id='fname' class="alert alert-success" role="alert"></div>
+    <div id='sname' class="alert alert-success" role="alert"></div>
+    <div id='ftitle' class="alert alert-success" role="alert"></div>
+    <div id='stitle' class="alert alert-success" role="alert"></div>
+    <div id='DisplayNotes' class="alert alert-success" role="alert"></div>
+    <div id='deleteOneNote' class="alert alert-success" role="alert"></div>
+  </div>
+</body>
+</html>
+<script src='./libs/jquery-3.2.1.min.js'></script>
+<script src='./features/saveOneNote.js'></script>
+<script src='./features/DisplayAllNotes.js'></script>
+<script src='./features/DisplayOneById.js'></script>
+<script src='./features/deleteOneNote.js'></script>
+<script src='./features/addMoreInputFields.js'></script>
+<script src='./AppCode/budgetCalculator.js'></script>
+<script src="./libs/semantic/dist/semantic.min.js"></script>
+<script>
+
+  $('.price').keyup(function () {
+
+    var price = document.getElementsByName('price').value;
+    var sum = 0;
+    $('.price').each(function() {
+      sum += Number($(this).val());
+    });
+
+    $('#totalbudget').val(sum);
+  });
+</script>
