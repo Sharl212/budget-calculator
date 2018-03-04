@@ -3,12 +3,28 @@
     border: 2px solid red;
     display:inline-block;
     text-align:left;
+    margin-top:5%;
 }
-.dynamicData{
-    margin-right:30px;
+.items,
+.prices{
+    /* text-align:center; */
+    padding-bottom:10px;
 }
-#title{
+.title,
+.totalprice{
     text-align:center !important;
+    padding-top:10px;
+    font-weight:bold;
+}
+
+.is-active {
+    font-weight: bold;
+    color: red !important;
+}
+li{
+    text-align:center;
+    color:blue;
+    font-size:20px;
 }
 .ui.success.message{
     display:none;
@@ -25,4 +41,5 @@
 
 .is-active {
     font-weight: bold;
+    color: red !important;
 }

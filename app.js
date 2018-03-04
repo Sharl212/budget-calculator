@@ -1,25 +1,25 @@
 			
-		const   express             = require('express'), // node modules
-				path                = require('path'),
-				favicon             = require('serve-favicon'),
-				logger              = require('morgan'),
-				cookieParser        = require('cookie-parser'),
-				_                   = require('lodash'),
-				cookie              = require('cookie'),
-				{MongoDB, ObjectID} = require('mongodb'),
-				bodyParser          = require('body-parser'),
-				port                = 4000;
+	const   express             = require('express'), // node modules
+			path                = require('path'),
+			favicon             = require('serve-favicon'),
+			logger              = require('morgan'),
+			cookieParser        = require('cookie-parser'),
+			_                   = require('lodash'),
+			cookie              = require('cookie'),
+			{MongoDB, ObjectID} = require('mongodb'),
+			bodyParser          = require('body-parser'),
+			port                = 4000,
 
-
-		const {mongoose}          = require('./public/db/mongoose'),  // required app files
-			  {budgetCalculator}  = require('./public/models/budgetCalculator-Model'),
-			  {User}              = require('./public/models/users-Model'),
-			  {authenticate}      = require('./public/middleware/authenticate'),
-			   $                  = require('./node_modules/jquery/dist/jquery.js'),
-			   application        = require('./routes/app'),
-			   login              = require('./routes/login'),
-			   registration       = require('./routes/registration'),
-			   app                = express();
+				// required app files
+			{mongoose}	       = require('./public/db/mongoose'),  
+			{budgetCalculator} = require('./public/models/budgetCalculator-Model'),
+			{User}             = require('./public/models/users-Model'),
+			{authenticate}     = require('./public/middleware/authenticate'),
+			$                  = require('./node_modules/jquery/dist/jquery.js'),
+			application        = require('./routes/app'),
+			login              = require('./routes/login'),
+			registration       = require('./routes/registration'),
+			app                = express();
 
 			//    cd C:\Program Files\MongoDB\Server\3.4\bin
 			//    mongod.exe --dbpath /Users/sharl/mongo-data
@@ -47,10 +47,38 @@ app.use('/app', application);
 // });
 //
 
+
+app.get('/user',authenticate, function(req,res,next){
+
+	User.findOne({
+		Username: req.user.Username
+	}).then((Data)=>{
+		if(!req.user){
+			return Promise.reject();
+		}
+		res.status(200).send(Data);
+	}).catch((err)=>{
+		res.status(400).send(err);
+	});
+});
+
+
+//check if user is logged in
+app.get('/auth', authenticate, function(req,res,next){
+	let user = req.user;
+	if(user){
+		res.status(200).send(user)
+	}else{
+		res.status(401).send(user);
+	}
+})
+
 // acquire mongoose model specification
 function listPost(req, res){
+	let id = Math.floor(Math.random() * (9999-1)) + 1;
 	const note = new budgetCalculator({
 				_creator:req.user._id,
+				id: id, 
 				_id: req.body._id,
 				firstItem: req.body.firstItem,
 				firstPrice: req.body.firstPrice,
@@ -61,30 +89,28 @@ function listPost(req, res){
 				tBudget: req.body.tBudget
 			});
 			note.save().then(function(Data){
-				return note.generateAuthToken();
-			}).then(function(token){
-				res.cookie('authorization', token).send(Data);
-				console.log('token', token);
+				res.status(200).send(Data);
 			}).catch(function(e){
 				res.status(400).send(e);
 			});
 }
 // POST to database
-app.post('/post', authenticate, listPost);
+app.post('/newNote', authenticate, listPost);
 
 // GET (display) Budget List viewed
 function listGet(req, res){
-		budgetCalculator.find({
-			_creator: req.user._id
-		}).then(function(Data){
-			res.send(Data);
-		}).catch(function(e){
-			res.status(404).send(e);
-		})
+	budgetCalculator.find({
+		_creator: req.user._id
+	}).then(function(Data){
+		res.send(Data);
+	}).catch(function(e){
+		res.status(404).send(e);
+	})
 }
 
 // GET all Calculated budgets
 app.get('/budget', authenticate ,listGet);
+
 
 // Display a specific list by ID
 function DisplayOneById(req, res){
@@ -126,9 +152,18 @@ function deleteList(req, res){
 // DELETE existing list.
 app.delete('/budget/:id', authenticate, deleteList);
 
+
+app.delete('/wipeAll', authenticate, function wipeAll(req,res,next){
+	budgetCalculator.remove({}).then(function(doc){
+		res.status(200).send(doc);
+		console.log(doc);
+	}).catch(function(e){
+		res.status(400).send(e);
+	})
+})
 // user registration
 function userRegistration(req, res){
-	var body = _.pick(req.body, ['email', 'password']);
+	var body = _.pick(req.body, ['email', 'password',"Username"]);
 	var user = new User(body);
 	user.save().then(function() {
 		return user.generateAuthToken();
@@ -144,7 +179,7 @@ function userRegistration(req, res){
 
 // POST /users/login {email, password}
 function userLogin(req, res){
-	var body = _.pick(req.body, ["email", "password"]);
+	var body = _.pick(req.body, ["email", "password","Username"]);
 
 	User.findByCredentials(body.email, body.password).then(function(user){
 		 return user.generateAuthToken().then(function(token){
@@ -177,11 +212,15 @@ function userLogout(req, res){
 
 
 
-
 // log in with the same token value
 app.get('/users/me', authenticate ,function(req, res){
 	res.send(req.user);
 });
+
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
 import { registration } from '../.././authorization/registration';
 
   class Register extends Component {
@@ -7,9 +6,9 @@ import { registration } from '../.././authorization/registration';
       return(
           <Fragment>
           <form className="form">
-          <input type="email" className="email"/>
-          <input type="password" className="password"/>
-          <input type="password" className="password"/>
+          <input type="username" className="username" placeholder='username'/><br/>
+          <input type="email" className="email" placeholder='email'/><br/>
+          <input type="password" className="password" placeholder='password'/>
           <button type="submit" onClick= {registration} name="button">SUBMIT</button>
         </form>
         </Fragment>

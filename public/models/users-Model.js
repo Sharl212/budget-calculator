@@ -6,6 +6,11 @@ const _ = require('lodash');
 const bcrypt = require('bcryptjs');
 
 var UserSchema = new mongoose.Schema({
+  Username:{
+    type:String,
+    required:true,
+    minlength:4
+  },
   email: {
     type: String,
     required: true,
@@ -37,10 +42,9 @@ var UserSchema = new mongoose.Schema({
 
 // convert the schema to JSON format
   UserSchema.methods.toJSON = function(){
-    var user = this;
-    var userObject = user.toObject();
+    var userObject = this.toObject();
 
-    return _.pick(userObject, ['_id','email']);
+    return _.pick(userObject, ['_id','email','Username']);
   };
 
 
@@ -60,7 +64,7 @@ var UserSchema = new mongoose.Schema({
 // DELETE token
   UserSchema.methods.removeToken = function(token){
     var user = this;
-    console.log('user-model', token);
+    // console.log('user-model', token);
 
     return user.update({
       $pull:{

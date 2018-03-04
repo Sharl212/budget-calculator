@@ -16,3 +16,19 @@ import $ from 'jquery';
             }
         });
 }
+
+export function wipeAll(){
+    $.ajax({
+        url:'/wipeAll',
+        type: 'delete',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(),
+        success: function(doc, status, xhr){
+            console.log(`all notes were deleted!`);
+        },
+        error: function(err, status, xhr){
+            console.log(err);
+        }
+    });
+}

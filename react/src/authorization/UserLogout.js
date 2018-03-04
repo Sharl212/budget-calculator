@@ -11,6 +11,7 @@ export function logout(e){
         success: function(){
             console.log('user logged out');
             $('input').val("");
+            window.location.reload(true);
         },
         error:function(err){
             console.log(err, 'ERROR user is not logged out');

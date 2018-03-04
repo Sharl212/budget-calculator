@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { login } from '../.././authorization/Userlogin';
 
   class Userlogin extends Component{ // generate user token {login}
@@ -8,17 +8,8 @@ import { login } from '../.././authorization/Userlogin';
     <form className="form">
       <input type="email" name="email"/>
       <input type="password" name="password"/>
-      <button type="submit" onClick={login} name="button">GOO</button>
-      <div className="ui success message">
-          <div className="header">
-              <p className='successMesg'>logged in successfully!</p>
-          </div>
-      </div>
-      <div className="ui negative message">
-        <div className="header">
-          <p className='errorMesg'>email or password is incorrect </p>
-        </div>
-      </div>
+      <button type="submit" onClick={login} name="button">GOO</button><br/>
+      <NavLink to='/registration' activeClassName='is-active' exact={true}>new here? sign up now!</NavLink>
     </form>
     );
   }

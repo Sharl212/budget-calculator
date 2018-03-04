@@ -1,17 +1,16 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
 import { calc } from '../.././app-form/calculateMethod';
 import { reset } from '../.././app-form/reset-form';
-import { saveNote } from '../.././app-features/saveOneNote';
+import { saveOneNote } from '../.././app-features/saveOneNote';
 import { searchById } from '../.././app-features/SearchById';
-import { DeleteOneNote } from '../.././app-features/DeleteOneNote';
+import { DeleteOneNote, wipeAll } from '../.././app-features/DeleteOneNote';
 
   class FormApp extends Component {
     render(){
       return(
        <Fragment>
         <div className="formdiv col-6">
-        <form className="ui form" id='form' method='post' action='/post'>
+        <form className="ui form" id='form'>
         <div className="field">
           <h4 className="ui horizontal divider header">
             Budget Calculator
@@ -27,17 +26,22 @@ import { DeleteOneNote } from '../.././app-features/DeleteOneNote';
             </div>
             <div className="field">
               <input  type='number' name='firstPrice'   onKeyUp={calc} className='price'  placeholder='price'  required autoComplete="off"/>
+              <select id='currency'>
+              <option value='EGP'>EGP</option>
+              <option value='USD'>USD</option>
+              </select>
               <input  type='number' name='secondPrice'  onKeyUp={calc} className='price'  placeholder='price'  required autoComplete="off"/>
               <input  type='number' name='thirdPrice'   onKeyUp={calc} className='price'  placeholder='price'  required autoComplete="off"/>
             </div>
           </div>
           <input  type='number' name='tBudget' id='totalbudget' placeholder="total price" readOnly/>
         </div>
-        <button id='save-btn' type='submit' onClick={saveNote} className="ui teal labeled icon positive button">
+
+        </form>
+        <button id='save-btn' type='submit' onClick={saveOneNote} className="ui teal labeled icon positive button">
             <span>save</span>
             <i className="add icon"></i>
         </button>
-        </form>
         <button id='reset-form' className='ui red button' onClick={reset}>reset</button> <br/>
 
         <div className="ui icon input">
@@ -50,6 +54,7 @@ import { DeleteOneNote } from '../.././app-features/DeleteOneNote';
           <i  id='delete' onClick={DeleteOneNote} className="circular trash link icon"></i>
         </div>
         <button id='showAll' className='ui blue button'>my notes</button>
+        <button id='showAll' className='ui red button' onClick={wipeAll}>remove all</button>
         </div>
         </Fragment>
       )

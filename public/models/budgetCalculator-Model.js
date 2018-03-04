@@ -5,6 +5,11 @@ var listSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
+  id:{
+    type: Number,
+    required: true,
+    default:null
+  },
   _id: {
     type: String,
     required: true,
