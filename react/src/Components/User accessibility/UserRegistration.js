@@ -1,16 +1,41 @@
 import React, { Component, Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
+
 import { registration } from '../.././authorization/registration';
 
   class Register extends Component {
     render(){
       return(
           <Fragment>
-          <form className="form">
-          <input type="username" className="username" placeholder='username'/><br/>
-          <input type="email" className="email" placeholder='email'/><br/>
-          <input type="password" className="password" placeholder='password'/>
-          <button type="submit" onClick= {registration} name="button">SUBMIT</button>
-        </form>
+       <form className='signupForm'>
+          <div className="form-group">
+            <h1>JOIN US!</h1>
+          <div className="dropdown-divider"></div> {/*line divider*/}
+            <div  className='form-group'>
+          <label htmlFor="UsernameInput">Username</label>
+            <input type="username" name='username' className="form-control" id="UsernameInput" aria-describedby="emailHelp"/>
+            <small id="username" className="form-text text-muted">Let us know what to call you.</small>
+          </div>
+          <label htmlFor="exampleInputEmail1">Email address</label>
+            <input type="email" name='email' className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div className="form-group">
+            <label htmlFor="exampleInputPassword1">Create a password</label>
+            <input type="password" name='password' className="form-control" id="CreatePassword" autoComplete="off"/>
+            <small id="passwordHelp" className="form-text text-muted">Passwords are encrypted and never stored.</small>
+          </div>
+          <div className="form-group">
+            <label htmlFor="exampleInputPassword2">Confirm your password</label>
+            <input type="password" name='password' className="form-control" id="ConfirmPassword" autoComplete="off"/>
+          </div>
+          <div className="form-check logindiv">
+            <NavLink  to='/' className='login-link'>already a member? sign in now!</NavLink>
+            {/* <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
+            <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label> */}
+          </div><br/>
+          <button type="submit" className="btn btn-success signup-btn" onClick={ registration }>Register</button>
+      </form>
         </Fragment>
       )
     }

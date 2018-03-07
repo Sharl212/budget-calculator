@@ -10,6 +10,11 @@ var listSchema = new mongoose.Schema({
     required: true,
     default:null
   },
+  currency:{
+    type: String,
+    required:true,
+    default: "EGP"
+  },
   _id: {
     type: String,
     required: true,

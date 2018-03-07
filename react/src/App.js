@@ -4,7 +4,7 @@ import Request from 'superagent';
 // import $ from 'jquery';
 
 // App Core
-import { Navbar } from './Components/AppCore/Navbar';
+import { Navbar, Navbarlogin, Navbarsignup } from './Components/AppCore/Navbar';
 import { NotFoundPage } from './Components/AppCore/NotFoundPage';
 
 // application Components
@@ -20,6 +20,7 @@ import { Userlogin } from './Components/User accessibility/Userlogin';
 import './css/App.css';  // main css file
 import './css/navbar.css';  // main css file
 import './css/notes.css';  // myNotesList
+// import './css/form.css';
 import './libs/semantic/dist/semantic.min.css'; // semantic library for styles.
 
 
@@ -62,7 +63,9 @@ import './libs/semantic/dist/semantic.min.css'; // semantic library for styles.
       return(
         <Fragment>
         {isLoggedIn === true?(
-          <p>Hi {username}</p>
+          <Fragment>
+                {username}
+          </Fragment>
         ):(
           <Fragment>
             </Fragment>
@@ -74,6 +77,15 @@ import './libs/semantic/dist/semantic.min.css'; // semantic library for styles.
   }
 
 
+class About extends Component{
+  render(){
+    return(
+      <Fragment>
+        <p> hello ,world!</p>
+        </Fragment>
+    )
+  }
+}
   class AppStructure extends Component{    
     render(){
       return(
@@ -95,15 +107,15 @@ import './libs/semantic/dist/semantic.min.css'; // semantic library for styles.
   render() {
     return (
         <BrowserRouter>
-          <div>
-            <Navbar/>
+          <Fragment>
           <Switch>
-            <Route path='/' component={Userlogin} exact={true}/>
-            <Route path='/app' component={AppStructure} />
-            <Route path='/registration' component={Register}/>
+            <Route path='/' render={props =><Fragment><Navbarlogin /><Userlogin /></Fragment>} exact={true}/>
+            <Route path='/app' component={AppStructure}/>
+            <Route path='/registration' render={props =><Fragment><Navbarsignup /><Register /></Fragment>}/>
+            <Route path='/about' render={props => <Fragment><Navbar/><About/></Fragment>}/>
             <Route component={NotFoundPage}/>
           </Switch>
-          </div>
+          </Fragment>
         </BrowserRouter>
     );
   }

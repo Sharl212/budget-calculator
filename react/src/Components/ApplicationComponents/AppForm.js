@@ -15,21 +15,21 @@ import { DeleteOneNote, wipeAll } from '../.././app-features/DeleteOneNote';
           <h4 className="ui horizontal divider header">
             Budget Calculator
           </h4>
-          <div>
             <input  className="input-group-text" type="text" id="id" name='_id' placeholder='NOTE NAME' autoFocus required autoComplete="off"/>
-          </div>
-          <div className="two fields">
+            <select id='currency' className='col-12'>
+                  <option value='EGP'>EGP</option>
+                  <option value='USD'>USD</option>
+              </select>
+              <br/><br/>
+          <div className="fields">
             <div className="field">
               <input  type='text' name='firstItem' placeholder='item' required autoComplete="off"/>
               <input  type='text' name='secondItem' placeholder='item' required autoComplete="off"/>
               <input  type='text' name='thirdItem'  placeholder='item' required autoComplete="off"/>
             </div>
+
             <div className="field">
               <input  type='number' name='firstPrice'   onKeyUp={calc} className='price'  placeholder='price'  required autoComplete="off"/>
-              <select id='currency'>
-              <option value='EGP'>EGP</option>
-              <option value='USD'>USD</option>
-              </select>
               <input  type='number' name='secondPrice'  onKeyUp={calc} className='price'  placeholder='price'  required autoComplete="off"/>
               <input  type='number' name='thirdPrice'   onKeyUp={calc} className='price'  placeholder='price'  required autoComplete="off"/>
             </div>
@@ -60,4 +60,4 @@ import { DeleteOneNote, wipeAll } from '../.././app-features/DeleteOneNote';
       )
     }
   }
-  export {FormApp};
+  export { FormApp };

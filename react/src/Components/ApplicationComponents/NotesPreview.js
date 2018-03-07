@@ -65,7 +65,7 @@ class ShowAll extends Component {
                   <li>{dynamicData.thirdPrice} {dynamicData.currency}</li>
                 </ul>
               </div>
-              <h3 className='col-12 totalprice'>{dynamicData.tBudget} EGP</h3>
+              <h3 className='col-12 totalprice'>{dynamicData.tBudget} {dynamicData.currency}</h3>
           </Fragment>
           )
       })

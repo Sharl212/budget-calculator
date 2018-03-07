@@ -1,0 +1,66 @@
+*{
+  font-size:20px;
+}
+
+body{
+  background-color:#FAFAFA !important;
+}
+
+.loginForm
+ {
+    width:450px;
+    height:350px;
+    margin-top:6% !important;
+    margin:auto;
+    padding:15px;
+    text-align:center;
+    border:2px solid #007bff;
+}
+
+input {
+    text-align:center;
+}
+
+/*  START LOGIN FORM */
+.login-btn{
+    margin-top: 4% !important;
+    font-size: 20px !important;
+    width: 150px;
+    height: 40px;
+    padding-top: 1% !important;
+}
+
+.form-check{
+    padding-left:0px !important;
+}
+.login-link,
+.signup-link{
+    font-size: 15px;
+    float:left;
+}
+.logindiv{
+    width:132%;
+}
+/*  END LOGIN FORM */
+
+
+/* START SIGN UP FORM */
+
+.signupForm{
+    width:450px;
+    margin-top:3% !important;
+    margin:auto;
+    padding:15px;
+    text-align:center;
+    border:2px solid #28a745;
+    /* border-radius:12px; */
+}
+
+.signup-btn{
+    width: 150px;
+    height: 40px;
+    font-size: 20px !important;
+    padding-top: 1% !important;
+    margin-top:3%;
+}
+/* END SIGN UP FORM */

@@ -16,8 +16,8 @@ export function registration(e){
                 window.location.reload(true);
             },
             error: function(err, status, xhr){
-            console.log(err);
-            $('#sucess').text(err);
+                console.log(err);
+                $('#sucess').text(err);
             }
       });
 }
