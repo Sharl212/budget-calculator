@@ -1,9 +1,9 @@
 .myNotesList {
     margin-bottom: 10px;
-    border: 2px solid red;
     display:inline-block;
     text-align:left;
-    margin-top:5%;
+    margin-top:2%;
+    margin-left: 100px;
 }
 .items,
 .prices{
@@ -44,3 +44,8 @@ li{
     color: red !important;
 }
 
+.aboutparagraph p{
+    margin-top:10px;
+    text-align : center;
+    font-size:150% !important;
+}

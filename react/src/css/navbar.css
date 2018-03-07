@@ -63,8 +63,11 @@ img {
 }
 
 .Navbarsignup{
-    border-bottom:1px solid #28A745;
+    border-bottom:2px solid #28A745;
 }
 .Navbarlogin{
-    border-bottom:1px solid rgba(0, 123, 255, 0.842);
+    border-bottom:2px solid #0069D9;
+}
+.NavbarApp{
+    border-bottom:2px solid #E0A800;
 }

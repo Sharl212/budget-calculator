@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Request from 'superagent';
+import { DeleteOneNote } from '../../app-features/DeleteOneNote';
 // import $ from 'jquery';
 
 
@@ -46,38 +47,42 @@ class ShowAll extends Component {
         return(
           
           <Fragment key={dynamicData.id}>
-            <h3 className='col-12 title'>{dynamicData._id}</h3>
-              <div className=' col-6' >
-                <ul className ='list-unstyled '>
-                <li className='items' >items</li>
-                  <li >{dynamicData.firstItem}</li>
-                  <li >{dynamicData.secondItem}</li>
-                  <li >{dynamicData.thirdItem}</li>
-                  {/* <li>Total Budget :</li> */}
-                </ul>
-              </div>
-  
-              <div className='dynamicData col-6'>
-                <ul className ='list-unstyled'>
-                  <li className='prices'>Prices</li>
-                  <li>{dynamicData.firstPrice} {dynamicData.currency}</li>
-                  <li>{dynamicData.secondPrice} {dynamicData.currency}</li>
-                  <li>{dynamicData.thirdPrice} {dynamicData.currency}</li>
-                </ul>
-              </div>
-              <h3 className='col-12 totalprice'>{dynamicData.tBudget} {dynamicData.currency}</h3>
+          <div className='jumbotron'>
+            <div className='row'>
+            <button onClick={DeleteOneNote}>Delete</button>
+              <input className='col-12 title form-control' id='deleteById' value={dynamicData._id} readOnly/>
+              <div className="dropdown-divider"></div> {/*line divider*/}
+                <div className='col-6' >
+                  <ul className='list-unstyled'>
+                    <li className='items'>items</li>
+                    <li >{dynamicData.firstItem}</li>
+                    <li >{dynamicData.secondItem}</li>
+                    <li >{dynamicData.thirdItem}</li>
+                    {/* <li>Total Budget :</li> */}
+                  </ul>
+                </div>
+    
+                <div className='dynamicData col-6'>
+                  <ul className ='list-unstyled'>
+                    <li className='prices'>Prices</li>
+                    <li>{dynamicData.firstPrice} {dynamicData.currency}</li>
+                    <li>{dynamicData.secondPrice} {dynamicData.currency}</li>
+                    <li>{dynamicData.thirdPrice} {dynamicData.currency}</li>
+                  </ul>
+                </div>
+                  </div>
+                  <h3 className='col-12 totalprice'>{dynamicData.tBudget} {dynamicData.currency}</h3>
+                </div>
           </Fragment>
           )
       })
         return (
           <Fragment>
               {isLoggedIn ===true?(
-                <div className=' col-6 myNotesList '>
-                <div className='row inNotesList' >
+                <div className='myNotesList '>
                 number of notes :  {count}
                 {listItems}
-               </div>
-              </div>
+                </div>
             ):(
               <Fragment>
                 </Fragment>

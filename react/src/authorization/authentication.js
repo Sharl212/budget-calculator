@@ -63,10 +63,12 @@ class Authentication extends Component {
                 <li className="nav-item">
                     <NavLink className="nav-link" to='/'>Login</NavLink>
                 </li>
+                <li className='nav-item'>
+                    <NavLink className="nav-link" to="/registration">Sign Up</NavLink>
+                </li>
             </ul>
             <div className='nav-item navbar-nav'>
                 <NavLink className="nav-link" to="/about">About</NavLink>
-                <NavLink className="nav-link" to="/registration">Sign Up</NavLink>
             </div>
             <a className="nav-link github-link" target='_blank' href="https://github.com/Sharl212/budget-calculator/tree/react-budgetCalculator">
                 <i className="fab fa-github"></i>

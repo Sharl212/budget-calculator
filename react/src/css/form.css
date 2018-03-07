@@ -17,6 +17,10 @@ body{
     border:2px solid #007bff;
 }
 
+input['"name":"firstname"']{
+    margin-right:10px !important;
+}
+
 input {
     text-align:center;
 }

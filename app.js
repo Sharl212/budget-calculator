@@ -51,11 +51,11 @@ app.use('/app', application);
 app.get('/user',authenticate, function(req,res,next){
 
 	User.findOne({
-		Username: req.user.Username
+		firstname: req.user.firstname
 	}).then((Data)=>{
 		if(!req.user){
 			return Promise.reject();
-		}
+		}		
 		res.status(200).send(Data);
 	}).catch((err)=>{
 		res.status(400).send(err);
@@ -163,7 +163,7 @@ app.delete('/wipeAll', authenticate, function wipeAll(req,res,next){
 })
 // user registration
 function userRegistration(req, res){
-	var body = _.pick(req.body, ['email', 'password',"Username"]);
+	var body = req.body;
 	var user = new User(body);
 	user.save().then(function() {
 		return user.generateAuthToken();

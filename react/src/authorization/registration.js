@@ -8,7 +8,8 @@ export function registration(e){
             dataType:'json',
             contentType: 'application/json',
             data: JSON.stringify({
-                Username: $('input[type="username"]').val(),
+                firstname: $('input[type="firstname"]').val(),
+                lastname: $('input[type="lastname"]').val(),
                 email: $('input[type="email"]').val(),
                 password: $('input[type="password"]').val()
             }),

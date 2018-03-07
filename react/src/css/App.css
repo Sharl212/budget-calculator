@@ -18,34 +18,44 @@ body{
   background-repeat: no-repeat;
 }
 .formdiv{
-  width:600px !important;
-  height: 650px;
-  background:#FFFFFF !important;
-  border-radius:3%;
-  margin-top:5%;
-  /* transform: translateX(230%); */
-  border-radius: 3% !important;
-  box-shadow: -5px 30px 50px black !important;
+  background: #FAFAFA !important;
+  margin-top: 2%;
+  margin-left: 5%;
+  float:left;
+  padding:20px;
+  border: 3px solid #E9ECEF;
+  border-radius:10px;
 }
 
-h4{
-  margin-left:15% !important;
+.title{
+  text-align: center;
+  font-size:40px !important;
+  border:none !important;
 }
-
-#currency {
+.items-title{
+  text-align:center;
+  text-transform: uppercase;
+}
+.price-title{
+  text-align:center;
+  text-transform: uppercase;
+}
+#currency,
+option {
   float:right;
-  width:60px;
-  font-size:12px;
+  text-align:center;
+  width:70px;
+  font-size:15px;
   padding: 3px 0px 3px 3px;
 }
 
 /* body structure  */
-.form,
-.input,
-#showAll
-{
-  margin-left:15% !important;
-  margin-top:2%;
+#removeall{
+  display: inline-block;
+  text-align:center;
+  font-size:25px;
+  margin-left:60px;
+  width:60%;
 }
 /* alerts */
 .label1 {
@@ -76,76 +86,23 @@ input[name='secondItem'],
 input[name='thirdItem'],
 .price,
 textarea {
-  border: 1.5px solid rgba(34,36,38,.15);
-  padding: 3px 0px 3px 3px;
   margin-top: 8% !important;
 }
 
-.error {
-  background-color: #FFF6F6 !important;
-  border-color: red !important;
-  padding: 3px 0px 3px 3px;
-  margin-top: 8%;
-}
-
-/* .success {
-  background-color: #FFF6F6 !important;
-  border-color: #21BA45 !important;
-  padding: 3px 0px 3px 3px;
-  margin-top: 8%;
-} */
-
- /* items input */
-input[name='firstItem']:focus,
-input[name='secondItem']:focus,
-input[name='thirdItem']:focus,
-.price:focus,
-textarea:focus {
-  border-color:#85b7d9 !important;
-}
- /* items focus */
-input[name='firstItem']:hover,
-input[name='secondItem']:hover,
-input[name='thirdItem']:hover,
-.price:hover,
-{
-  border-color:#c8e4f7 !important;
-  transition:0.3s;
-}
-
-input[name='tBudget'],
 input[name='tBudget']{
   cursor: not-allowed;
-  text-align: center;
-  width:100%;
-  font-size: 20px !important;
-  color: green !important;
+  font-size: 25px !important;
+  text-align:center;
+  height:90px !important;
   /* border: 1px solid #f76767 !important; */
 }
+
 input[name='tBudget']::placeholder{
   color:black !important;
   text-transform: uppercase;
-  font-size: 15px;
+  font-size: 20px;
 }
 
-.ui{
-  margin-left:69px;
-  width:69%;
-  margin-bottom:2%;
-}
-#searchbyid:hover,
-#searchbyid:focus{
-  border:1.7px solid #85b7d9;
-
-} 
-#deleteById:hover,
-#deleteById:focus
-{
-  border:1.7px solid  rgb(211, 12, 45) !important;
-}
-#deleteById:focus{
-  border: 0.5px solid #f95e5e;
-}
 ::placeholder
 {
 	color: #c9c5c5 !important;
@@ -153,10 +110,7 @@ input[name='tBudget']::placeholder{
 }
 
 #id{
-  background-color:transparent;
-  margin-top:1%;
   width:100% !important;
-
 }
 #id::placeholder{
   color: black !important;
@@ -168,75 +122,15 @@ input[name='tBudget']::placeholder{
 /* input fields */
 #save-btn{
   width:100%;
-  margin-top:5px;
   text-transform: uppercase;
-  font-size:15px;
+  font-size:25px;
+  text-align:center;
+  margin-top:-7px;
 }
-span{
-  margin-right:18%;
-}
+
 #reset-form{
   width:15%;
-  margin-bottom:5px;
+  margin-top:13px;
   padding:8px;
   text-transform: uppercase;
 }
-#save-btn:hover{
-  color: white !important;
-  box-shadow: #22a541 0 80px 0px 1px inset !important;
-}
-#ShowByID:hover{
-  color: white !important;
-  box-shadow: #4484CE 0 80px 0px 1px inset !important;
-}
-#delete:hover{
-  color:white;
-  box-shadow: rgb(211, 12, 45) 0 80px 0px 2px inset;
-}
-#delete:focus{
-  box-shadow: rgb(211, 12, 45) 0 80px 0px 2px inset;
-}
-#ShowByID
-{
-  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  box-shadow:#4484CE  0 0px 0px 1.2px inset;
-}
-#delete
-{
-  -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  color:black;
-  box-shadow: rgb(211, 12, 45)  0 0px 0px 1.2px inset;
-}
-#showAll
-{
-  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  box-shadow:#4484CE  0 0px 0px 2px inset;
-  text-transform: uppercase;
-}
-/* #add{
-  -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-  color:black;
-  background-color: transparent;
-  box-shadow:#4484CE  0 0px 0px 2px inset;
-  border:none;
-  display: block;
-  max-width: 40%;
-  width:28.5%;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 14px;
-  padding: 2px 19px;
-  cursor:pointer;
-  margin-left:13%;
-  margin-top:-5%;
-  text-transform: uppercase;
-
-} */

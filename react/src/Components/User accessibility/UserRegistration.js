@@ -8,14 +8,22 @@ import { registration } from '../.././authorization/registration';
       return(
           <Fragment>
        <form className='signupForm'>
-          <div className="form-group">
             <h1>JOIN US!</h1>
           <div className="dropdown-divider"></div> {/*line divider*/}
-            <div  className='form-group'>
-          <label htmlFor="UsernameInput">Username</label>
-            <input type="username" name='username' className="form-control" id="UsernameInput" aria-describedby="emailHelp"/>
+        <div className='form-row'>
+          <div  className='form-group col-6'>
+            <label htmlFor="UsernameInput">First name</label><br/>
+              <input type="firstname" name='fname' className="form-control" id="firstname" aria-describedby="firstname"/>
+            </div>
+            <div  className='form-group col-6'>
+            <label htmlFor="UsernameInput">Last name</label><br/>
+              <input type="lastname" name='lname' className="form-control" id="lastname" aria-describedby="lastname"/>
+            </div>
+            <div  className='form-group col-12'>
             <small id="username" className="form-text text-muted">Let us know what to call you.</small>
+            </div>
           </div>
+          <div className="form-group">
           <label htmlFor="exampleInputEmail1">Email address</label>
             <input type="email" name='email' className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
             <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
