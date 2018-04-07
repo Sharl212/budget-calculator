@@ -1,86 +1,97 @@
 import React, { Component, Fragment } from 'react';
 import Request from 'superagent';
+
 import { DeleteOneNote } from '../../app-features/DeleteOneNote';
-// import $ from 'jquery';
+import { searchById } from '../../app-features/SearchById';
+import { fetchNotes } from '../../authorization/fetchNotes';
+import { saveOneNote } from '../../app-features/saveOneNote';
+
 
 
 class ShowAll extends Component {
     constructor(props){
       super(props);
+
       this.state = {
-        Data: [],
-        length:[],
-        isLoggedIn:[]
-      }
+          currentNotes: [],
+          length:[],
+          searchbyid:[],
+          isLoggedIn:[]
+        }
     }
 
     componentDidMount(){
         // fetch notes
-          Request.get('/budget').then((res)=>{
-            let DataString = Array.from(res.body);
-            this.setState({
-              Data: DataString,
-              length: res.body.length
-            })
-          }).catch((err)=> {
-            console.log(err);
-          })
+        fetchNotes().then((res)=>{
+          let DataString = Array.from(res.body);
+          this.setState((prevState,props)=>{
+              return {
+                currentNotes: DataString,
+                length: res.body.length
+            }
+          });
+        }).catch((err)=> {
+          console.log(err);
+        })
 
-          // check if user is logged in
+            // check if user is logged in
           Request.get('/auth').then((user)=>{
             if(user){
-                this.setState({
+                 this.setState(()=>{
+                   return {
                     isLoggedIn: true
+                   }
                 })
             }
           }).catch((err)=> {
-              this.setState({
+            this.setState(()=>{
+              return {
                   isLoggedIn: false
-              })
+              }
+           })
           });
         }
         render(){
           const count = this.state.length;
-          const myNotes = this.state.Data;
+          const AllNotes = this.state.allOfTheNotes;
+          const currentNotes = this.state.currentNotes;
           const isLoggedIn = this.state.isLoggedIn;
-          const listItems = myNotes.map((dynamicData)=>{
-        return(
-          
-          <Fragment key={dynamicData.id}>
-          <div className='jumbotron'>
-            <div className='row'>
-            <button onClick={DeleteOneNote}>Delete</button>
-              <input className='col-12 title form-control' id='deleteById' value={dynamicData._id} readOnly/>
-              <div className="dropdown-divider"></div> {/*line divider*/}
-                <div className='col-6' >
-                  <ul className='list-unstyled'>
-                    <li className='items'>items</li>
-                    <li >{dynamicData.firstItem}</li>
-                    <li >{dynamicData.secondItem}</li>
-                    <li >{dynamicData.thirdItem}</li>
-                    {/* <li>Total Budget :</li> */}
-                  </ul>
-                </div>
-    
-                <div className='dynamicData col-6'>
-                  <ul className ='list-unstyled'>
-                    <li className='prices'>Prices</li>
-                    <li>{dynamicData.firstPrice} {dynamicData.currency}</li>
-                    <li>{dynamicData.secondPrice} {dynamicData.currency}</li>
-                    <li>{dynamicData.thirdPrice} {dynamicData.currency}</li>
-                  </ul>
-                </div>
+          const listItems = currentNotes.map((dynamicData)=>{
+          return(
+            <Fragment key={dynamicData._id}>
+              <div className='jumbotron'>
+                <div className='row'>
+                <div className='col-12'><h1 className='noteTitle'>{dynamicData.noteTitle}</h1></div>
+                  <div className='col-6' >
+                    <ul className='list-unstyled'>
+                      <li className='items'>items</li>
+                      <li className='item'>{dynamicData.firstItem}</li>
+                      <li className='item'>{dynamicData.secondItem}</li>
+                      <li className='item'>{dynamicData.thirdItem}</li>
+                      {/* <li>Total Budget :</li> */}
+                    </ul>
                   </div>
-                  <h3 className='col-12 totalprice'>{dynamicData.tBudget} {dynamicData.currency}</h3>
-                </div>
-          </Fragment>
-          )
+
+                  <div className='dynamicData col-6'>
+                    <ul className ='list-unstyled'>
+                      <li className='prices'>Prices</li>
+                      <li>{dynamicData.firstPrice} {dynamicData.currency}</li>
+                      <li>{dynamicData.secondPrice} {dynamicData.currency}</li>
+                      <li>{dynamicData.thirdPrice} {dynamicData.currency}</li>
+                    </ul>
+                  </div>
+                    </div>
+                    <h3 className='col-12 totalprice'>{dynamicData.tBudget} {dynamicData.currency}</h3>
+                  </div>
+            </Fragment>
+            )
       })
         return (
           <Fragment>
               {isLoggedIn ===true?(
                 <div className='myNotesList '>
                 number of notes :  {count}
+                <input className='col-6 form-control' id='uniqueid'/>
                 {listItems}
                 </div>
             ):(
@@ -91,5 +102,5 @@ class ShowAll extends Component {
           </Fragment>
           )
       }
-  }   
+  }
   export { ShowAll };

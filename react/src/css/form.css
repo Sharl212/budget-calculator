@@ -6,10 +6,18 @@ body{
   background-color:#FAFAFA !important;
 }
 
+/* overwrite container styles */
+@media (min-width: 1200px) {
+    .container {
+      max-width: 1600px !important;
+    }
+}
+
+
 .loginForm
  {
     width:450px;
-    height:350px;
+    height:490px;
     margin-top:6% !important;
     margin:auto;
     padding:15px;
@@ -27,11 +35,10 @@ input {
 
 /*  START LOGIN FORM */
 .login-btn{
-    margin-top: 4% !important;
+    width: 100%;
     font-size: 20px !important;
-    width: 150px;
-    height: 40px;
-    padding-top: 1% !important;
+    margin-top:1%;
+    margin-bottom: 4%;
 }
 
 .form-check{
@@ -51,7 +58,7 @@ input {
 /* START SIGN UP FORM */
 
 .signupForm{
-    width:450px;
+    width:550px;
     margin-top:3% !important;
     margin:auto;
     padding:15px;
@@ -61,10 +68,27 @@ input {
 }
 
 .signup-btn{
-    width: 150px;
+    width: 100%;
     height: 40px;
     font-size: 20px !important;
     padding-top: 1% !important;
     margin-top:3%;
+    margin-bottom:2%;
 }
 /* END SIGN UP FORM */
+
+
+/* alert */
+
+.alert-success {
+    text-align:center;
+    display:none;
+    transition: opacity 2s ease-in-out;
+}
+
+.alert-danger {
+    text-align:center;
+    display:none;
+}
+
+/* alert */

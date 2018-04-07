@@ -12,7 +12,7 @@ export function searchById(){
             contentType: 'application/json',
             data: JSON.stringify(),
             success: function(Data){
-                console.log('mabrook 3al shasha :) : ', {Data});
+                console.log('mabrook 3al shasha :) : ', JSON.stringify(Data));
             },
             error: function(err, status, xhr){
                 console.log(err);

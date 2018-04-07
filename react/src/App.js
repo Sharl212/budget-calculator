@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Request from 'superagent';
 // import $ from 'jquery';
 
@@ -24,13 +24,23 @@ import './css/notes.css';  // myNotesList
 // import './libs/semantic/dist/semantic.min.css'; // semantic library for styles.
 
 
+function isLoggedIn(){
+  Request.get('/auth').then((user)=>{
+    if(user){
+        return true;
+    }
+    console.log(user);
+  }).catch((err)=> {
+        return false;
+  })
+}
+
   class Username extends Component{ // fetch Users name 
     constructor(props){
       super(props);
       this.state={
         firstname:[],
-        lastname:[],
-        isLoggedIn:[]
+        lastname:[]
       }
     }
 
@@ -44,28 +54,15 @@ import './css/notes.css';  // myNotesList
       }).catch((err)=>{
         console.log(err);
       });
-
-      // check if user is logged in
-      Request.get('/auth').then((user)=>{
-        if(user){
-            this.setState({
-                isLoggedIn: true
-            })
-        }
-      }).catch((err)=> {
-          this.setState({
-              isLoggedIn: false
-          })
-      });
     }
+
     render(){
       const firstname = this.state.firstname;
       const lastname = this.state.lastname;
-      const isLoggedIn = this.state.isLoggedIn;
 
       return(
         <Fragment>
-        {isLoggedIn === true?(
+        {isLoggedIn = true?(
           <Fragment>
                 {firstname} {lastname}
           </Fragment>
@@ -99,7 +96,7 @@ class About extends Component{
     render(){
       return(
         <Fragment>
-          <div className='container-fluid'>
+          <div className='container'>
             <div className='row'>
                 <FormApp/>
                 <ShowAll/>
@@ -111,6 +108,41 @@ class About extends Component{
   }
 
 
+  const PrivateRoute = ({ }) => (
+
+    <Route
+      render = {props =>
+        isLoggedIn = false? (
+          <Redirect
+          to={{
+            pathname: "/",
+            state: { from: props.location }
+          }}
+        />
+        ):(
+          <Fragment> <NavbarApp/><AppStructure/></Fragment>
+        )
+      }
+    />
+  );
+
+  const LoginRoute = ()=>(
+      <Route
+      render = {props =>
+        isLoggedIn = false? (
+            <Redirect
+            to={{
+              pathname: "/app",
+              state: { from: props.location }
+            }}
+          /> 
+      ): (
+        <Fragment><Navbarlogin /><Userlogin /></Fragment>
+        )
+      }
+    />
+  );
+
   // App Routing
  class App extends Component {
   render() {
@@ -118,9 +150,9 @@ class About extends Component{
         <BrowserRouter>
           <Fragment>
           <Switch>
-            <Route path='/' render={props =><Fragment><Navbarlogin /><Userlogin /></Fragment>} exact={true}/>
-            <Route path='/app'  render={props => <Fragment><NavbarApp/><AppStructure/></Fragment>}/>
+            <LoginRoute path='/'  exact={true}/>
             <Route path='/registration' render={props =><Fragment><Navbarsignup /><Register /></Fragment>}/>
+            <PrivateRoute path='/app'   render={props =><Fragment><NavbarApp /><AppStructure/></Fragment>} exact={true}/>
             <Route path='/about' render={props => <Fragment><Navbar/><About/></Fragment>}/>
             <Route component={NotFoundPage}/>
           </Switch>

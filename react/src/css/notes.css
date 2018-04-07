@@ -2,13 +2,37 @@
     margin-bottom: 10px;
     display:inline-block;
     text-align:left;
-    margin-top:2%;
-    margin-left: 100px;
+    margin-top:1%;
+    width: 730px;
+    margin-left: 134px;
+}
+.noteTitle{
+    text-align:center;
+}
+#uniqueid{
+    font-size:20px;
+    width:30% !important;
+}
+@media (min-width: 576px){
+    .jumbotron {
+        padding: 1rem 0.8rem !important;
+    }
+}
+
+#deleteById{
+    text-transform:uppercase;
+}
+.delete-note-btn{
+    margin-top:15 px;
+    margin-left:30px;
 }
 .items,
 .prices{
     /* text-align:center; */
     padding-bottom:10px;
+    font-weight:bold;
+    color: black;
+    font-size:35px;
 }
 .title,
 .totalprice{
@@ -25,6 +49,11 @@ li{
     text-align:center;
     color:blue;
     font-size:20px;
+}
+.item{
+    font-size:21px;
+    text-align:left;
+    margin-left:35%;
 }
 .ui.success.message{
     display:none;

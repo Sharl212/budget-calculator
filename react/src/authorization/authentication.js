@@ -50,7 +50,7 @@ class Authentication extends Component {
                     
                     <NavLink className="nav-link about" to="/about">About</NavLink>
 
-                    <a className="nav-link github-link" target='_blank' href="https://github.com/Sharl212/budget-calculator/tree/react-budgetCalculator">
+                    <a className="nav-link github-link" target='_blank' rel="noopener noreferrer" href="https://github.com/Sharl212/budget-calculator/tree/react-budgetCalculator">
                         <i className="fab fa-github"></i>
                         Github
                     </a>
@@ -70,7 +70,7 @@ class Authentication extends Component {
             <div className='nav-item navbar-nav'>
                 <NavLink className="nav-link" to="/about">About</NavLink>
             </div>
-            <a className="nav-link github-link" target='_blank' href="https://github.com/Sharl212/budget-calculator/tree/react-budgetCalculator">
+            <a className="nav-link github-link" target='_blank' rel="noopener noreferrer" href="https://github.com/Sharl212/budget-calculator/tree/react-budgetCalculator">
                 <i className="fab fa-github"></i>
                 Github
              </a>

@@ -1,9 +1,10 @@
 import $ from 'jquery'; 
+import { fetchNotes } from '../authorization/fetchNotes';
 
 
- export function saveOneNote(){ // saving a note
-
-        const   _id             = $('input[name="_id"]').val(),
+export function saveOneNote(e){ // saving a note
+            e.preventDefault();
+        const   noteTitle     = $('input[name="id"]').val(),
                 firstItem     = $('input[name="firstItem"]').val(),
                 firstPrice    = $('input[name="firstPrice"]').val(),
                 secondItem    = $('input[name="secondItem"]').val(),
@@ -21,7 +22,7 @@ import $ from 'jquery';
             contentType: 'application/json',
             data: JSON.stringify({
                 currency,
-                _id,
+                noteTitle,
                 firstItem,
                 firstPrice,
                 secondItem,
@@ -31,10 +32,16 @@ import $ from 'jquery';
                 tBudget
             }),
             success: function(Data){
+                $('.alert-success').css("display","block");
+                setTimeout(function(){$('.alert-success').css("display","none");}, 3000);
                 console.log('note was saved!',Data);
+                fetchNotes();
             },
             error: function(err, status, xhr){
-              console.log('err',err);
+                $('.alert-danger').css("display","block");
+                setTimeout(function(){$('.alert-danger').css("display","none");}, 3000);
+                console.error(err);
             }
         });
 }
+

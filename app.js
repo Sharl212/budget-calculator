@@ -1,4 +1,3 @@
-			
 	const   express             = require('express'), // node modules
 			path                = require('path'),
 			favicon             = require('serve-favicon'),
@@ -8,7 +7,7 @@
 			cookie              = require('cookie'),
 			{MongoDB, ObjectID} = require('mongodb'),
 			bodyParser          = require('body-parser'),
-			port                = 4000,
+			port                = process.env.PORT || 11000,
 
 				// required app files
 			{mongoose}	       = require('./public/db/mongoose'),  
@@ -34,7 +33,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, './react/build')));
 
 app.use('/', login);
 app.use('/register', registration);
@@ -69,25 +68,28 @@ app.get('/auth', authenticate, function(req,res,next){
 	if(user){
 		res.status(200).send(user)
 	}else{
-		res.status(401).send(user);
+		res.status(401).send(err);
 	}
 })
 
 // acquire mongoose model specification
 function listPost(req, res){
-	let id = Math.floor(Math.random() * (9999-1)) + 1;
+	// let id = Math.floor(Math.random() * (9999-1)) + 1;
+
 	const note = new budgetCalculator({
-				_creator:req.user._id,
-				id: id, 
-				_id: req.body._id,
-				firstItem: req.body.firstItem,
-				firstPrice: req.body.firstPrice,
-				secondItem: req.body.secondItem,
-				secondPrice: req.body.secondPrice,
-				thirdItem: req.body.thirdItem,
-				thirdPrice: req.body.thirdPrice,
-				tBudget: req.body.tBudget
+					currency:req.body.currency,
+					_creator:req.user._id,
+					_id: req.body._id,
+					noteTitle: req.body.noteTitle,
+					firstItem: req.body.firstItem,
+					firstPrice: req.body.firstPrice,
+					secondItem: req.body.secondItem,
+					secondPrice: req.body.secondPrice,
+					thirdItem: req.body.thirdItem,
+					thirdPrice: req.body.thirdPrice,
+					tBudget: req.body.tBudget
 			});
+
 			note.save().then(function(Data){
 				res.status(200).send(Data);
 			}).catch(function(e){
@@ -114,29 +116,27 @@ app.get('/budget', authenticate ,listGet);
 
 // Display a specific list by ID
 function DisplayOneById(req, res){
-	let id = req.params.id;
 
-		budgetCalculator.findOne({_creator: req.user._id, _id: id}).then(function(Data){
-			if(!Data){
-				return res.status(404).send();
-			}
-			res.status(200).send({Data});
-		}).catch((err)=>{
-			res.status(400).send(err);
-		})
+	budgetCalculator.findOne({_creator: req.user._id, _id: req.params.id}).then(function(Data){
+		if(!Data){
+			return res.status(404).send();
+		}
+		res.status(200).send({firstItem:Data.firstItem});
+	}).catch((err)=>{
+		res.status(400).send(err);
+	})
 }
-// administratorModel.findOne({'username': 'mohamed'}, function(err, resad){
-// 	console.log('into mongoose findone');
-// });
+
+
 // GET one note by ID
 app.get('/budget/:id' ,authenticate, DisplayOneById);
 
 
 // DELETE a specific list by ID
 function deleteList(req, res){
-	var id = req.params.id;
+
 	budgetCalculator.findOneAndRemove({
-		_id: req.params.id,
+		id: req.body.id,
 		_creator: req.user._id
 	}).then(function(doc){
 		if(!doc){

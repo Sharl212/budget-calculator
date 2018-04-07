@@ -1,5 +1,6 @@
 import $ from 'jquery';
 
 export function reset(){
-    $("#form input").val("");
+    $("input[type='text']").val("");
+    $("input[type='number']").val("");
 }

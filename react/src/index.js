@@ -13,4 +13,4 @@ render(); // render the application
 
 registerServiceWorker();
 
-export {render};
+export { render };

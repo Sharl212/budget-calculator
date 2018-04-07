@@ -19,8 +19,9 @@ body{
 }
 .formdiv{
   background: #FAFAFA !important;
-  margin-top: 2%;
-  margin-left: 5%;
+  height:700px;
+  margin-top: 3%;
+  margin-left:3%;
   float:left;
   padding:20px;
   border: 3px solid #E9ECEF;
@@ -110,15 +111,9 @@ input[name='tBudget']::placeholder{
 }
 
 #id{
-  width:100% !important;
+  text-transform:uppercase;
 }
-#id::placeholder{
-  color: black !important;
-  border:none;
-  display:inline-block;
-  text-align: center;
-  margin-top:3%;
-}
+
 /* input fields */
 #save-btn{
   width:100%;

@@ -5,14 +5,12 @@ img {
     height:40px;
     width:40px;
     margin-right:10px;
-    display:inline-block;
     /* line-height: 1.22; */
     float:left;
     vertical-align:bottom;
 }
 
 .username{
-    display:inline-block;
     color:black;
     text-align: right;
     line-height: 1.22;
@@ -25,6 +23,8 @@ img {
 }
 
 .logout-btn{
+    width: 100px;
+    height: 40px;
     text-transform: uppercase;
     margin-right: 1%;
 }
@@ -39,7 +39,6 @@ img {
 .github-link,
 .github-link:hover{
     margin-right: 30px;
-    display:inline-block;
     font-size: 1.3em;
     color:black;
     text-align: right;
@@ -51,7 +50,6 @@ img {
 .fa-github{
     font-size: 1.1em;
     margin-right:10px;
-    display:inline-block;
     /* line-height: 1.22; */
     float:left;
     vertical-align:bottom;

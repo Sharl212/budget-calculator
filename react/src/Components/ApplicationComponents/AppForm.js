@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+
+
 import { calc } from '../.././app-form/calculateMethod';
 import { reset } from '../.././app-form/reset-form';
 import { saveOneNote } from '../.././app-features/saveOneNote';
@@ -10,11 +12,17 @@ import { DeleteOneNote, wipeAll } from '../.././app-features/DeleteOneNote';
       return(
        <Fragment>
         <div className="formdiv">
-        <form className="" id='form'>
+        <div class="alert alert-success" role="alert">
+            Note saved successfully!
+        </div>
+        <div class="alert alert-danger" role="alert">
+            Note title is taken. choose another one!
+        </div>
+        <form id='form' onSubmit={saveOneNote}>
           <div  className='form-group col-12'>
             {/* <label className='title col-12'>Budget Calculator</label> */}
             <div className='row'>
-              <input type="text" className="form-control col-12" id="id" name='_id' placeholder='NOTE NAME' aria-describedby="firstname" autoFocus required autoComplete="off"/>
+              <input type="text" className="form-control col-12" name="id"  placeholder='NOTE NAME' aria-describedby="firstname" autoFocus required autoComplete="off"/>
               </div>
               <select id='currency' className='col-12'>
                   <option value='EGP'>EGP</option>
@@ -39,15 +47,17 @@ import { DeleteOneNote, wipeAll } from '../.././app-features/DeleteOneNote';
             </div>
           </div>
           <input  type='number' name='tBudget' className="form-control"id='totalbudget' placeholder="total price" readOnly/>
-        </form>
-        <div className='row'>
-          <div className="form-group col-12">
-              <button id='reset-form' className='btn btn-danger' onClick={reset}>reset</button>
-            </div>
-          <div className="form-group col-12">
-              <button id='save-btn' onClick={saveOneNote} className="btn btn-success">save</button>
+          <div className='row'>
+            <div className="form-group col-12">
+                <input type='button' id='reset-form' className='btn btn-danger' value='reset' onClick={reset}/>
+              </div>
+            <div className="form-group col-12">
+              <button id='save-btn' className="btn btn-success" type='submit'>save</button>
             </div>
         </div>
+
+        </form>
+
           </div>
         </Fragment>
       )

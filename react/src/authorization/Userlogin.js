@@ -12,14 +12,15 @@ export function login(e){
             email:$("input[name='email']").val(),
             password:$("input[name='password']").val()
         }),
+        
         success: function(data){
+                $('.alert-success').css("display","block");
+                setTimeout(function(){$('.alert-success').css("display","none");}, 3000);
                 window.location.reload(true);
         },
         error: function(err){
-            $('.ui.negative.message').css({
-                display:'block'
-            })
-            $('.ui.negative.message').fadeOut(1000, 'linear');
+            $('.alert-danger').css("display","block");
+            setTimeout(function(){$('.alert-danger').css("display","none");}, 3000);
         }
     });
 }

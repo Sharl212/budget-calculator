@@ -5,21 +5,23 @@ var listSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
-  id:{
-    type: Number,
+  // uniqueID:{ // randomly generated number
+  //   type: Number,
+  //   required: true,
+  //   default: null,
+  //   unique: true
+  // },
+  noteTitle: { // note title
+    type: String,
     required: true,
-    default:null
+    minlength: 1,
+    trim: true,
+    unique: true
   },
   currency:{
     type: String,
     required:true,
     default: "EGP"
-  },
-  _id: {
-    type: String,
-    required: true,
-    minlength: 1,
-    trim: true
   },
   firstItem: {
     type: String,

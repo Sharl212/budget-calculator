@@ -2,16 +2,22 @@
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
+  "engines":{
+    "node":"8.9.0"
+  },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.40",
     "@babel/plugin-transform-react-jsx": "^7.0.0-beta.40",
     "babel-eslint": "^7.2.3",
-    "eslint": "^3.19.0",
+    "eslint": "4.1.1",
     "flow-bin": "^0.66.0",
+    "mobx": "^4.0.2",
+    "mobx-react": "^5.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
+    "redux": "^3.7.2",
     "superagent": "^3.8.2",
     "typescript": "^2.7.2"
   },
@@ -21,5 +27,18 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:4000"
+  "babel": {
+    "plugins": [
+      "transform-decorators-legacy"
+    ],
+    "presets": [
+      "react-app"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4"
+  }
 }
