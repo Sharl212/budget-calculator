@@ -2,8 +2,8 @@
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
-  "engines":{
-    "node":"8.9.0"
+  "engines": {
+    "node": "8.9.0"
   },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.40",
