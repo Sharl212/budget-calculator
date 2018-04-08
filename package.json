@@ -5,8 +5,8 @@
   "scripts": {
     "start": "node ./app.js"
   },
-  "engines":{
-    "node":"8.9.0"
+  "engines": {
+    "node": "8.9.0"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -28,7 +28,7 @@
     "jsonwebtoken": "^8.1.1",
     "jwt-simple": "^0.5.1",
     "lodash": "^4.17.5",
-    "mongoose": "^4.13.9",
+    "mongoose": "^4.13.12",
     "morgan": "~1.9.0",
     "passport": "^0.4.0",
     "react-app": "file:react",
