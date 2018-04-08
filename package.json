@@ -37,11 +37,7 @@
     "reactstrap": "^5.0.0-beta",
     "request": "^2.83.0",
     "request-cookies": "^1.1.0",
-    "semantic-ui": "^2.2.14",
     "serve-favicon": "~2.4.5",
     "validator": "^9.4.0"
-  },
-  "devDependencies": {
-    "@angular/cli": "^1.6.8"
   }
 }
