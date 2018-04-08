@@ -6,12 +6,13 @@
     "node": "8.9.0"
   },
   "dependencies": {
-    "@babel/core": "^7.0.0-beta.40",
+    "@babel/core": "^7.0.0-beta.44",
     "@babel/plugin-transform-react-jsx": "^7.0.0-beta.40",
     "acorn": "^5.5.3",
     "acorn-dynamic-import": "^3.0.0",
     "acorn-globals": "^4.1.0",
     "acorn-jsx": "^4.1.1",
+    "babel": "^6.23.0",
     "babel-eslint": "^7.2.3",
     "eslint": "4.1.1",
     "flow-bin": "^0.66.0",
