@@ -10,6 +10,8 @@
     "@babel/plugin-transform-react-jsx": "^7.0.0-beta.40",
     "acorn": "^5.5.3",
     "acorn-dynamic-import": "^3.0.0",
+    "acorn-globals": "^4.1.0",
+    "acorn-jsx": "^4.1.1",
     "babel-eslint": "^7.2.3",
     "eslint": "4.1.1",
     "flow-bin": "^0.66.0",
