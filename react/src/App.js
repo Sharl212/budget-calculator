@@ -108,8 +108,7 @@ class About extends Component{
   }
 
 
-  const PrivateRoute = ({ }) => (
-
+  const PrivateRoute = () => (
     <Route
       render = {props =>
         isLoggedIn = false? (

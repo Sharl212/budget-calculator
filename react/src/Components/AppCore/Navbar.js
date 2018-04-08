@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import { Authentication } from '../../authorization/authentication';
-import { Username } from '../../App';
 
 
 class Navbar extends Component{

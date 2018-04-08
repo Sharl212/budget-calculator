@@ -4,8 +4,8 @@ import React, { Component, Fragment } from 'react';
 import { calc } from '../.././app-form/calculateMethod';
 import { reset } from '../.././app-form/reset-form';
 import { saveOneNote } from '../.././app-features/saveOneNote';
-import { searchById } from '../.././app-features/SearchById';
-import { DeleteOneNote, wipeAll } from '../.././app-features/DeleteOneNote';
+// import { searchById } from '../.././app-features/SearchById';
+// import { DeleteOneNote, wipeAll } from '../.././app-features/DeleteOneNote';
 
   class FormApp extends Component {
     render(){

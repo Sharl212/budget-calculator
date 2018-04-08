@@ -6,7 +6,7 @@ import Request from 'superagent';
 
 // files required
 import { logout } from './UserLogout';
-import { Userlogin } from '../Components/User accessibility/Userlogin';
+// import { Userlogin } from '../Components/User accessibility/Userlogin';
 import { Username } from '../App';
 import photo from './man-1.png';
 
@@ -50,7 +50,7 @@ class Authentication extends Component {
                     
                     <NavLink className="nav-link about" to="/about">About</NavLink>
 
-                    <a className="nav-link github-link" target='_blank' rel="noopener noreferrer" href="https://github.com/Sharl212/budget-calculator/tree/react-budgetCalculator">
+                    <a className="nav-link github-link" target='_blank' rel="noopener noreferrer" href="https://github.com/Sharl212/budget-calculator/tree/production-build" alt="github link">
                         <i className="fab fa-github"></i>
                         Github
                     </a>
@@ -70,7 +70,7 @@ class Authentication extends Component {
             <div className='nav-item navbar-nav'>
                 <NavLink className="nav-link" to="/about">About</NavLink>
             </div>
-            <a className="nav-link github-link" target='_blank' rel="noopener noreferrer" href="https://github.com/Sharl212/budget-calculator/tree/react-budgetCalculator">
+            <a className="nav-link github-link" target='_blank' rel="noopener noreferrer" href="https://github.com/Sharl212/budget-calculator/tree/production-build">
                 <i className="fab fa-github"></i>
                 Github
              </a>

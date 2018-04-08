@@ -15,6 +15,8 @@ export function registration(e){
                     password: $('input[type="password"]').val()
                 }),
                 success: function(doc){
+                    $('.alert-success').css("display","block");
+                    setTimeout(function(){$('.alert-success').css("display","none");}, 3000);
                     window.location.reload(true);
                 },
                 error: function(err, status, xhr){

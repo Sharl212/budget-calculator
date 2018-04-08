@@ -8,8 +8,8 @@ import { registration } from '../.././authorization/registration';
       return(
           <Fragment>
             <form className='signupForm' onSubmit={registration}>
-              <div class="alert alert-success col-12" role="alert">registered succesffully</div>
-              <div class="alert alert-danger col-12" role="alert">fill all the fields below</div>
+              <div class="alert alert-success col-12" role="alert">registered successfully</div>
+              <div class="alert alert-danger col-12" role="alert">Email is taken, choose another one</div>
                   <h1>JOIN US!</h1>
                 <div className="dropdown-divider"></div> {/*line divider*/}
               <div className='form-row'>

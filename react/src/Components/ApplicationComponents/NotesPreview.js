@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import Request from 'superagent';
 
-import { DeleteOneNote } from '../../app-features/DeleteOneNote';
-import { searchById } from '../../app-features/SearchById';
+// import { DeleteOneNote } from '../../app-features/DeleteOneNote';
+// import { searchById } from '../../app-features/SearchById';
 import { fetchNotes } from '../../authorization/fetchNotes';
-import { saveOneNote } from '../../app-features/saveOneNote';
+// import { saveOneNote } from '../../app-features/saveOneNote';
 
 
 
@@ -53,7 +53,6 @@ class ShowAll extends Component {
         }
         render(){
           const count = this.state.length;
-          const AllNotes = this.state.allOfTheNotes;
           const currentNotes = this.state.currentNotes;
           const isLoggedIn = this.state.isLoggedIn;
           const listItems = currentNotes.map((dynamicData)=>{
