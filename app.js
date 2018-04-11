@@ -168,7 +168,8 @@ function userRegistration(req, res){
 	user.save().then(function() {
 		return user.generateAuthToken();
 	}).then(function(token) {
-		res.cookie('authorization', token).send();
+		const doc = 'registered';
+		res.cookie('authorization', token).status(200).send();
 	}).catch(function(e) {
 		res.status(400).send(e);
 	})

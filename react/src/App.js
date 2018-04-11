@@ -136,7 +136,7 @@ class About extends Component{
             }}
           /> 
       ): (
-        <Fragment><Navbarlogin /><Userlogin /></Fragment>
+        <Fragment><Navbarlogin /><div className='container'><div className='row'><Userlogin /></div></div></Fragment>
         )
       }
     />

@@ -90,7 +90,7 @@ class ShowAll extends Component {
               {isLoggedIn ===true?(
                 <div className='myNotesList '>
                 number of notes :  {count}
-                <input className='col-6 form-control' id='uniqueid'/>
+                {/* <input className='col-6 form-control' id='uniqueid'/> */}
                 {listItems}
                 </div>
             ):(

@@ -12,7 +12,7 @@ img {
 
 .username{
     color:black;
-    text-align: right;
+    text-align: center;
     line-height: 1.22;
     float:right;
     margin-top:10px;
@@ -23,10 +23,10 @@ img {
 }
 
 .logout-btn{
-    width: 100px;
     height: 40px;
     text-transform: uppercase;
     margin-right: 1%;
+    text-align: center;
 }
 
 
@@ -45,19 +45,21 @@ img {
     line-height: 1.22;
     float:right;
     vertical-align:bottom;
+    text-align: center !important;
 }
 
 .fa-github{
     font-size: 1.1em;
     margin-right:10px;
     /* line-height: 1.22; */
-    float:left;
+    float:center;
     vertical-align:bottom;
 }
 
-.settings,
+/* .settings, */
 .about{
-    margin-right:10px;
+    font-size: 1.1em;
+    text-align: center;
 }
 
 .Navbarsignup{

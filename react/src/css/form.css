@@ -18,11 +18,20 @@ body{
  {
     width:450px;
     height:490px;
-    margin-top:6% !important;
+    margin-top:3% !important;
     margin:auto;
     padding:15px;
     text-align:center;
     border:2px solid #007bff;
+}
+
+.authenticated{
+    display:none;
+    text-align:center;
+}
+.unauthenticated{
+    display:none;
+    text-align:center;
 }
 
 input['"name":"firstname"']{
@@ -49,8 +58,9 @@ input {
     font-size: 15px;
     float:left;
 }
-.logindiv{
-    width:132%;
+
+.invalid{
+    border:1px solid red;
 }
 /*  END LOGIN FORM */
 
@@ -75,6 +85,11 @@ input {
     margin-top:3%;
     margin-bottom:2%;
 }
+
+.register-error{
+    display:none;
+    text-align:center;
+}
 /* END SIGN UP FORM */
 
 
@@ -88,7 +103,7 @@ input {
 
 .alert-danger {
     text-align:center;
-    display:none;
+    /* height:10%; */
 }
 
 /* alert */

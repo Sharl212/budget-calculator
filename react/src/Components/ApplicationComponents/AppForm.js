@@ -12,10 +12,10 @@ import { saveOneNote } from '../.././app-features/saveOneNote';
       return(
        <Fragment>
         <div className="formdiv">
-        <div class="alert alert-success" role="alert">
+        <div className="alert alert-success" role="alert">
             Note saved successfully!
         </div>
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger app-error" role="alert">
             Note title is taken. choose another one!
         </div>
         <form id='form' onSubmit={saveOneNote}>

@@ -14,13 +14,13 @@ export function login(e){
         }),
         
         success: function(data){
-                $('.alert-success').css("display","block");
-                setTimeout(function(){$('.alert-success').css("display","none");}, 3000);
-                window.location.reload(true);
+            $('.authenticated').css("display","block");
+            setTimeout(function(){$('.authenticated').css("display","none");}, 3000);
+            window.location.reload(true);
         },
         error: function(err){
-            $('.alert-danger').css("display","block");
-            setTimeout(function(){$('.alert-danger').css("display","none");}, 3000);
+            $('.unauthenticated').css("display","block");
+            setTimeout(function(){$('.unauthenticated').css("display","none");}, 3000);
         }
     });
 }

@@ -6,14 +6,24 @@
     "node": "8.9.0"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0-beta.44",
+    "@babel/plugin-transform-react-jsx": "^7.0.0-beta.40",
     "acorn": "^5.5.3",
     "acorn-dynamic-import": "^3.0.0",
     "acorn-globals": "^4.1.0",
     "acorn-jsx": "^4.1.1",
-    "mongoose": "^5.0.13"
+    "eslint": "4.1.1",
+    "flow-bin": "^0.66.0",
+    "jquery": "^3.3.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1",
+    "superagent": "^3.8.2",
+    "typescript": "^2.7.2"
   },
   "scripts": {
-    "start": "node .././app.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

@@ -41,12 +41,12 @@ class Authentication extends Component {
               <Fragment>
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item navbar-nav">
-                        <img src={photo}/>
+                        <img src={photo} alt="user pic"/>
                         <NavLink className="username" to="/app"><Username/></NavLink>
                     </li>
                   </ul>
                 <div className='nav-item navbar-nav active'>
-                    <NavLink className="nav-link settings" to="/settings">Settings</NavLink>
+                    {/* <NavLink className="nav-link settings" to="/settings">Settings</NavLink> */}
                     
                     <NavLink className="nav-link about" to="/about">About</NavLink>
 
@@ -55,7 +55,7 @@ class Authentication extends Component {
                         Github
                     </a>
                 </div>                
-            <button className='btn btn-warning logout-btn' onClick={logout}>logout</button>
+            <button className='btn btn-warning logout-btn col-lg-1 col-md-12 col-sm-12' onClick={logout}>logout</button>
              </Fragment>
         ):(
             <Fragment>
@@ -67,13 +67,14 @@ class Authentication extends Component {
                     <NavLink className="nav-link" to="/registration">Sign Up</NavLink>
                 </li>
             </ul>
-            <div className='nav-item navbar-nav'>
-                <NavLink className="nav-link" to="/about">About</NavLink>
+            <div className='nav-item navbar-nav active'>
+                <NavLink className="nav-link about" to="/about">About</NavLink>
+
+                <a className="nav-link github-link" target='_blank' rel="noopener noreferrer" href="https://github.com/Sharl212/budget-calculator/tree/production-build" alt="github link">
+                    <i className="fab fa-github"></i>
+                        Github
+                    </a>
             </div>
-            <a className="nav-link github-link" target='_blank' rel="noopener noreferrer" href="https://github.com/Sharl212/budget-calculator/tree/production-build">
-                <i className="fab fa-github"></i>
-                Github
-             </a>
             </Fragment>
           )
           }
