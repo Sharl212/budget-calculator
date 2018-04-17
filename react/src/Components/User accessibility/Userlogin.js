@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { login } from '../.././authorization/Userlogin';
 import '../../css/form.css';
+// import {auth} from '../../index';
 
 class Userlogin extends Component{ // generate user token { login }
 
@@ -101,6 +102,7 @@ class Userlogin extends Component{ // generate user token { login }
           </div><br/>
           <button type="submit" className="btn btn-primary login-btn">Login</button>
         </form>
+        {/* <button type="button" onClick= {auth.login} className="btn btn-primary login-btn">Login</button>         */}
       </div>
        </Fragment>
       );

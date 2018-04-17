@@ -1,3 +1,5 @@
+/*eslint no-restricted-globals: 0 */
+
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Request from 'superagent';
@@ -24,23 +26,14 @@ import './css/notes.css';  // myNotesList
 // import './libs/semantic/dist/semantic.min.css'; // semantic library for styles.
 
 
-function isLoggedIn(){
-  Request.get('/auth').then((user)=>{
-    if(user){
-        return true;
-    }
-    console.log(user);
-  }).catch((err)=> {
-        return false;
-  })
-}
 
   class Username extends Component{ // fetch Users name 
     constructor(props){
       super(props);
       this.state={
         firstname:[],
-        lastname:[]
+        lastname:[],
+        isLoggedIn: ''
       }
     }
 
@@ -54,15 +47,29 @@ function isLoggedIn(){
       }).catch((err)=>{
         console.log(err);
       });
+
+      const CheckisLoggedIn = () =>{
+        Request.get('/auth').then((user)=>{
+          if(user){
+              this.setState({isLoggedIn: 'true'});
+          }
+          console.log(user);
+        }).catch((err)=> {
+            this.setState({isLoggedIn: 'false'});
+            console.log(err);
+        })
+      }
+      CheckisLoggedIn();
     }
 
     render(){
-      const firstname = this.state.firstname;
-      const lastname = this.state.lastname;
+      const firstname  = this.state.firstname;
+      const lastname   = this.state.lastname;
+      const isLoggedIn = this.state.isLoggedIn;
 
-      return(
+     return(
         <Fragment>
-        {isLoggedIn = true?(
+        { isLoggedIn === 'true'?(
           <Fragment>
                 {firstname} {lastname}
           </Fragment>
@@ -107,52 +114,94 @@ class About extends Component{
     }
   }
 
-
-  const PrivateRoute = () => (
-    <Route
-      render = {props =>
-        isLoggedIn = false? (
-          <Redirect
-          to={{
-            pathname: "/",
-            state: { from: props.location }
-          }}
-        />
-        ):(
-          <Fragment> <NavbarApp/><AppStructure/></Fragment>
-        )
-      }
-    />
-  );
-
-  const LoginRoute = ()=>(
-      <Route
-      render = {props =>
-        isLoggedIn = false? (
-            <Redirect
-            to={{
-              pathname: "/app",
-              state: { from: props.location }
-            }}
-          /> 
-      ): (
-        <Fragment><Navbarlogin /><div className='container'><div className='row'><Userlogin /></div></div></Fragment>
-        )
-      }
-    />
-  );
-
   // App Routing
  class App extends Component {
+   constructor(){
+     super();
+
+     this.state = {
+       isLoggedIn: ''
+     }
+   }
+   
+   componentDidMount(){
+    const CheckisLoggedIn = () =>{
+      Request.get('/auth').then((user)=>{
+        if(user){
+            this.setState({isLoggedIn: 'true'});
+        }
+        console.log(user);
+      }).catch((err)=> {
+          this.setState({isLoggedIn: 'false'});
+          console.log(err);
+      })
+    }
+    CheckisLoggedIn();
+   }
+
   render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    
+    const PrivateRoute = () => (
+      <Route
+        render = {() =>
+          isLoggedIn === 'false'? ( // if the user is not logged in , the application page is restricted
+            <Redirect
+            to={{
+              pathname: '/',
+              state: { from: location.pathname.replace(/^\/?|\/$/g,'') }
+            }}
+          />
+          ):(
+            <Fragment><NavbarApp/><AppStructure/></Fragment> // application page
+          )
+        }
+      />
+    );
+  
+    const LoginRoute = ()=>(
+        <Route
+          render = {() =>
+            isLoggedIn === 'true' ? ( // if the user is logged in , the login page is restricted.
+                <Redirect
+                to={{
+                  pathname: "/app",
+                  state: { from: location.pathname.replace(/^\/?|\/$/g,"") }
+                }}
+              />
+          ):(
+            <Fragment><Navbarlogin /><div className='container'><div className='row'><Userlogin /></div></div></Fragment>
+            )
+        }
+      />
+    );
+  
+    const RegisterRoute = () =>(
+        <Route
+        render = {props =>
+          isLoggedIn === 'true'? ( // if the user is logged in , the register page is restricted, redirected to the app page
+              <Redirect
+              to={{
+                pathname: "/app",
+                state: { from: location.pathname.replace(/^\/?|\/$/g,"") }
+              }}
+            /> 
+        ): (
+          <Fragment><Navbarsignup /><Register /></Fragment>
+        )
+      }
+    />
+    )
+    
     return (
         <BrowserRouter>
           <Fragment>
           <Switch>
-            <LoginRoute path='/'  exact={true}/>
-            <Route path='/registration' render={props =><Fragment><Navbarsignup /><Register /></Fragment>}/>
-            <PrivateRoute path='/app'   render={props =><Fragment><NavbarApp /><AppStructure/></Fragment>} exact={true}/>
-            <Route path='/about' render={props => <Fragment><Navbar/><About/></Fragment>}/>
+            <LoginRoute path='/' exact={true}/>
+            <RegisterRoute path='/registration' exact={true}/>
+            <PrivateRoute path='/app' exact={true}/>
+            <Route path='/about' render={() => <Fragment><Navbar/><About/></Fragment>}/>
+            <Route path='/callback' render={() => <Fragment><h1>loading..</h1></Fragment>}/>
             <Route component={NotFoundPage}/>
           </Switch>
           </Fragment>

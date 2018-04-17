@@ -7,8 +7,8 @@ import { saveOneNote } from '../.././app-features/saveOneNote';
 // import { searchById } from '../.././app-features/SearchById';
 // import { DeleteOneNote, wipeAll } from '../.././app-features/DeleteOneNote';
 
-  class FormApp extends Component {
-    render(){
+class FormApp extends Component {
+  render(){
       return(
        <Fragment>
         <div className="formdiv">
@@ -46,7 +46,7 @@ import { saveOneNote } from '../.././app-features/saveOneNote';
               <input type="number"  name='thirdPrice'   className="form-control price"   placeholder='Ex: 40 USD..' onKeyUp={calc}   required autoComplete="off"/>
             </div>
           </div>
-          <input  type='number' name='tBudget' className="form-control"id='totalbudget' placeholder="total price" readOnly/>
+          <input  type='number' name='tBudget' className="form-control" id='totalbudget' placeholder="total price" readOnly/>
           <div className='row'>
             <div className="form-group col-12">
                 <input type='button' id='reset-form' className='btn btn-danger' value='reset' onClick={reset}/>

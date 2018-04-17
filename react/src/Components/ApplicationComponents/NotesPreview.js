@@ -43,7 +43,7 @@ class ShowAll extends Component {
                    }
                 })
             }
-          }).catch((err)=> {
+          }).catch(()=> {
             this.setState(()=>{
               return {
                   isLoggedIn: false

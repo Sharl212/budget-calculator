@@ -1,15 +1,26 @@
+/* eslint-disable */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+// import Auth from './authorization/auth0';
 
+// export const auth = new Auth();
+// let state = {};
 
-let render = ()=>{
-    ReactDOM.render(<App />, document.getElementById('root'));
-};
+// window.setState = (changes) => {
+//     state = Object.assign({}, state, changes);
+// };
 
-render(); // render the application
+// let initialState = {
+//     location: location.pathname.replace(/^\/?|\/$/g,"")
+// };
+
+// window.setState(initialState);
+ReactDOM.render(<App/>, document.getElementById('root'));
 
 registerServiceWorker();
 
